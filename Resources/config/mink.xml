@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+
+        <parameter key="behat.mink.class">Behat\Mink\Mink</parameter>
+        <parameter key="behat.mink.driver.symfony.class">Behat\MinkBundle\Driver\SymfonyDriver</parameter>
+        <parameter key="behat.mink.selectors_handler.class">Behat\Mink\Selector\SelectorsHandler</parameter>
+        <parameter key="behat.test_client.class">Behat\MinkBundle\Client</parameter>
+
+        <parameter key="behat.mink.default_driver">symfony</parameter>
+        <parameter key="behat.mink.start_url">null</parameter>
+        <parameter key="behat.mink.browser_name">firefox</parameter>
+
+    </parameters>
+    <services>
+
+        <service id="behat.mink" class="%behat.mink.class%" scope="prototype">
+            <argument type="service" id="behat.mink.selectors_handler" />
+        </service>
+
+        <service id="behat.mink.driver.symfony" class="%behat.mink.driver.symfony.class%"
+            scope="prototype">
+            <argument>%behat.mink.start_url%</argument>
+            <argument type="service" id="behat.test_client" />
+            <tag name="behat.mink.driver" alias="symfony"/>
+        </service>
+
+        <service id="behat.test_client" class="%behat.test_client.class%"
+            scope="prototype">
+            <argument type="service" id="kernel" />
+            <argument>%test.client.parameters%</argument>
+            <argument type="service" id="test.client.history" />
+            <argument type="service" id="test.client.cookiejar" />
+        </service>
+
+        <service id="behat.mink.selectors_handler" class="%behat.mink.selectors_handler.class%" />
+
+        <service id="behat.mink.selector.css" class="Behat\Mink\Selector\CssSelector">
+            <tag name="behat.mink.selector" alias="css" />
+        </service>
+
+        <service id="behat.mink.selector.named" class="Behat\Mink\Selector\NamedSelector">
+            <tag name="behat.mink.selector" alias="named" />
+        </service>
+
+    </services>
+</container>
