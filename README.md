@@ -186,15 +186,20 @@ class AcmeWebTestCase extends MinkTestCase
 
     public function testSimpleBrowsing()
     {
-        // choose driver:
+        // 1. CHOOSE DRIVER:
+
         // Symfony2 test.client driver will be used by default:
-        // you don't need to do anything
+        // you don't need to do anything, it's enabled by default
+
         // OR you can switch to headless goutte driver:
         // static::$mink->switchToDriver('goutte');
+
         // OR to JS-enabled in-browser Sahi driver:
         // static::$mink->swithcToDriver('sahi');
 
-        // all actions below works similar for ALL Mink drivers:
+
+
+        // 2. DO ACTIONS (all actions below works similar for ALL Mink drivers):
 
         $session = static::$mink->getSession();
 
@@ -224,6 +229,8 @@ class AcmeWebTestCase extends MinkTestCase
 
         $session->visit($this->base . '_behat/tests/form');
         $page = $session->getPage();
+
+        // 3. FILL FORMS:
 
         $page->fillField('name', 'ever');
         $page->fillField('age', '23');
