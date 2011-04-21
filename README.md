@@ -236,7 +236,7 @@ class AcmeWebTestCase extends MinkTestCase
 }
 ```
 
-[http://docs.behat.org/api/mink/index.html](Mink API docs)
+For further learning, read [http://docs.behat.org/api/mink/index.html](Mink API docs).
 
 ## CREDITS
 
