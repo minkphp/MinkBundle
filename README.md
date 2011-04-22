@@ -204,7 +204,7 @@ class AcmeWebTestCase extends MinkTestCase
         OR even to JS-enabled in-browser Sahi driver, which will
         start real browser and make real requests through it:
 
-            static::$mink->swithcToDriver('sahi');
+            static::$mink->switchToDriver('sahi');
 
         NOTICE: State (current page, session, cookies) is not persisted
                 between different drivers. When you switch driver - you
