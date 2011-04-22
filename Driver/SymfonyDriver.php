@@ -30,4 +30,12 @@ class SymfonyDriver extends GoutteDriver
         $url = preg_replace('/[^\/]+\.php\//', '', $url);
         parent::visit($url);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatusCode()
+    {
+        return $this->getClient()->getResponse()->getStatusCode();
+    }
 }
