@@ -177,8 +177,6 @@ class AcmeWebTestCase extends MinkTestCase
 {
     protected $base;
 
-    abstract protected function getDriverName();
-
     protected function setUp()
     {
         $this->base = static::$kernel->getContainer()->getParameter('behat.mink.start_url');
@@ -186,18 +184,29 @@ class AcmeWebTestCase extends MinkTestCase
 
     public function testSimpleBrowsing()
     {
-        // 1. CHOOSE DRIVER:
+        /* 1. CHOOSE DRIVER:
 
-        // Symfony2 test.client driver will be used by default:
-        // you don't need to do anything, it's enabled by default
+        Symfony2 test.client driver will be used by default, so
+        you don't need to do anything, it's enabled by default.
+        And you can always switch to it later (from different driver) with:
 
-        // OR you can switch to headless goutte driver:
-        // static::$mink->switchToDriver('goutte');
+            static::$mink->switchToDefaultDriver();
 
-        // OR to JS-enabled in-browser Sahi driver:
-        // static::$mink->swithcToDriver('sahi');
+        OR with more verbose version:
 
+            static::$mink->switchToDriver('symfony');
 
+        Also, you can switch to headless goutte driver, which will
+        make real HTTP requests against your Symfony2 application:
+
+            static::$mink->switchToDriver('goutte');
+
+        OR even to JS-enabled in-browser Sahi driver, which will
+        start real browser and make real requests through it:
+
+            static::$mink->swithcToDriver('sahi');
+
+        */
 
         // 2. DO ACTIONS (all actions below works similar for ALL Mink drivers):
 
@@ -220,7 +229,7 @@ class AcmeWebTestCase extends MinkTestCase
             $this->fail('Unexisting link should throw exception onClick');
         } catch (\Behat\Mink\Exception\ElementNotFoundException $e) {}
 
-        // after each test case, Mink will automatically switch to default driver
+        // After each test case, Mink will automatically switch to default driver
     }
 
     public function testForms()
@@ -236,6 +245,8 @@ class AcmeWebTestCase extends MinkTestCase
         $page->fillField('age', '23');
         $page->selectFieldOption('speciality', 'programmer');
         $page->clickButton('Send spec info');
+
+        // 4. ASSERT RESPONSE:
 
         $this->assertTrue($page->hasContent('POST recieved'));
         $this->assertTrue($page->hasContent('ever is 23 years old programmer'));
