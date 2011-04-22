@@ -206,6 +206,9 @@ class AcmeWebTestCase extends MinkTestCase
 
             static::$mink->swithcToDriver('sahi');
 
+        NOTICE: State (current page, session, cookies) is not persisted
+                between different drivers. When you switch driver - you
+                reset the state.
         */
 
         // 2. DO ACTIONS (all actions below works similar for ALL Mink drivers):
