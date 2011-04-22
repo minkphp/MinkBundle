@@ -55,6 +55,10 @@ class BehatMinkExtension extends Extension
                 }
             }
         }
+
+        $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
+        $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
+        $container->setParameter('mink.paths.lib', $minkLibPath);
     }
 
     /**
