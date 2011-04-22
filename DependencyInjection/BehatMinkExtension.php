@@ -49,7 +49,7 @@ class BehatMinkExtension extends Extension
         foreach ($config as $ns => $tlValue) {
             if (!is_array($tlValue)) {
                 $container->setParameter("behat.mink.$ns", $tlValue);
-            } elseif (null !== $tlValue) {
+            } else {
                 foreach ($tlValue as $name => $value) {
                     $container->setParameter("behat.mink.$ns.$name", $value);
                 }
