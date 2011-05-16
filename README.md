@@ -56,9 +56,9 @@ behat_mink:
 ```
 
 By default, Mink will use Symfony2 test.client to test your application, but you can enable and
-switch to other drivers anytime during testsuite run.
+use other sessions anytime during testsuite run.
 
-Notice, that `start_url` is required parameter for any Mink driver. Best practice is to create new
+Notice, that `start_url` is required parameter for any Mink session. Best practice is to create new
 front controller for testing needs:
 
 ``` php
@@ -79,7 +79,7 @@ $kernel = new AppKernel('test', true);
 $kernel->handle(Request::createFromGlobals())->send();
 ```
 
-and use it in your test suites (front controller will be used by Goutte and Sahi drivers):
+and use it in your test suites (front controller will be used by Goutte and Sahi sessions):
 
 ``` yml
 # ...
@@ -88,12 +88,12 @@ behat_mink:
     start_url:  http://your_app_local.url/app_test.php/
 ```
 
-## GoutteDriver
+## GoutteSession
 
 By default all Mink actions will be runed against Symfony2 test.client, which **will not** reboot
 kernel between requests. But what if you want to isolate your test suite from real application and,
 what's even more important, to isolate different requests and responses from each others. Then you
-need to use Goutte driver.
+need to use Goutte session.
 
 ### Add Goutte and Zend libraries to your vendors dir.
 
@@ -115,7 +115,7 @@ $loader->registerNamespaces(array(
 ));
 ```
 
-### Enable Mink GoutteDriver in your project configuration file
+### Enable Mink GoutteSession in your project configuration file
 
 ``` yml
 # ...
@@ -125,10 +125,10 @@ behat_mink:
     goutte:     ~
 ```
 
-## SahiDriver
+## SahiSession
 
 Sometimes, headless browser emulators are not enough to test your complex applications. Especially
-in case when you want to test AJAX or JS functionality. Sahi driver comes to rescue! So, you need to
+in case when you want to test AJAX or JS functionality. Sahi session comes to rescue! So, you need to
 enable it...
 
 ### Add Behat\SahiClient and Buzz libraries to your vendors dir.
@@ -151,7 +151,7 @@ $loader->registerNamespaces(array(
 ));
 ```
 
-### Enable Mink SahiDriver in your project configuration file
+### Enable Mink SahiSession in your project configuration file
 
 ``` yml
 # ...
@@ -159,7 +159,7 @@ $loader->registerNamespaces(array(
 behat_mink:
     start_url:  http://your_app_local.url/app_test.php/
     goutte:     ~   # enable both Goutte
-    sahi:       ~   # and Sahi drivers
+    sahi:       ~   # and Sahi session
 ```
 
 ## Writing first test
@@ -184,34 +184,31 @@ class AcmeWebTestCase extends MinkTestCase
 
     public function testSimpleBrowsing()
     {
-        /* 1. CHOOSE DRIVER:
+        /* 1. CHOOSE SESSION:
 
-        Symfony2 test.client driver will be used by default, so
-        you don't need to do anything, it's enabled by default.
-        And you can always switch to it later (from different driver) with:
+        Symfony2 test.client session will be used by default, so
+        getSession() without parameters will return test.client
+        session for you in any place of your app.
 
-            static::$mink->switchToDefaultDriver();
+            $session = static::$mink->getSession();
 
         OR with more verbose version:
 
-            static::$mink->switchToDriver('symfony');
+            $session = static::$mink->getSession('symfony');
 
-        Also, you can switch to headless goutte driver, which will
+        Also, you can use headless goutte session, which will
         make real HTTP requests against your Symfony2 application:
 
-            static::$mink->switchToDriver('goutte');
+            $session = static::$mink->getSession('goutte');
 
-        OR even to JS-enabled in-browser Sahi driver, which will
+        OR even to JS-enabled in-browser Sahi session, which will
         start real browser and make real requests through it:
 
-            static::$mink->switchToDriver('sahi');
+            $session = static::$mink->getSession('sahi');
 
-        NOTICE: State (current page, session, cookies) is not persisted
-                between different drivers. When you switch driver - you
-                reset the state.
         */
 
-        // 2. DO ACTIONS (all actions below works similar for ALL Mink drivers):
+        // 2. DO ACTIONS (all actions below works similar for ALL Mink sessions):
 
         $session = static::$mink->getSession();
 
@@ -231,8 +228,6 @@ class AcmeWebTestCase extends MinkTestCase
             $session->getPage()->clickLink('p100');
             $this->fail('Unexisting link should throw exception onClick');
         } catch (\Behat\Mink\Exception\ElementNotFoundException $e) {}
-
-        // After each test case, Mink will automatically switch to default driver
     }
 
     public function testForms()
