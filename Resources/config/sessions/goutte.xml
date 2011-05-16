@@ -12,11 +12,15 @@
     </parameters>
     <services>
 
-        <service id="behat.mink.driver.goutte" class="%behat.mink.driver.goutte.class%"
-            scope="prototype">
-            <argument>%behat.mink.start_url%</argument>
-            <argument type="service" id="behat.goutte" />
-            <tag name="behat.mink.driver" alias="goutte"/>
+        <service id="behat.mink.session.goutte" class="%behat.mink.session.class%" scope="prototype">
+            <argument type="service">
+                <service class="%behat.mink.driver.goutte.class%" scope="prototype">
+                    <argument>%behat.mink.start_url%</argument>
+                    <argument type="service" id="behat.goutte" />
+                </service>
+            </argument>
+            <argument type="service" id="behat.mink.selectors_handler" />
+            <tag name="behat.mink.session" alias="goutte" />
         </service>
 
         <service id="behat.goutte" class="%behat.goutte.class%"

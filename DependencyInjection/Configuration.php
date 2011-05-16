@@ -35,7 +35,7 @@ class Configuration implements ConfigurationInterface
                 scalarNode('start_url')->
                     isRequired()->
                 end()->
-                scalarNode('default_driver')->
+                scalarNode('default_session')->
                     defaultValue('symfony')->
                 end()->
                 scalarNode('browser_name')->

@@ -40,10 +40,10 @@ class BehatMinkExtension extends Extension
         $loader->load('mink.xml');
 
         if (isset($config['goutte'])) {
-            $loader->load('drivers/goutte.xml');
+            $loader->load('sessions/goutte.xml');
         }
         if (isset($config['sahi'])) {
-            $loader->load('drivers/sahi.xml');
+            $loader->load('sessions/sahi.xml');
         }
 
         foreach ($config as $ns => $tlValue) {

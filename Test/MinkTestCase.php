@@ -38,9 +38,8 @@ class MinkTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function teardown()
     {
-        if (null !== static::$mink) {
-            static::$mink->resetDriver();
-            static::$mink->switchToDefaultDriver();
+        if (null !== static::$mink && static::$mink->getSession()->isStarted()) {
+            static::$mink->getSession()->reset();
         }
     }
 
@@ -50,7 +49,7 @@ class MinkTestCase extends \PHPUnit_Framework_TestCase
     public static function tearDownAfterClass()
     {
         if (null !== static::$mink) {
-            static::$mink->stopDrivers();
+            static::$mink->stopSessions();
         }
     }
 

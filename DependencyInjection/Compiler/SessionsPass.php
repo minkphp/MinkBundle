@@ -16,11 +16,11 @@ use Symfony\Component\DependencyInjection\Reference,
  */
 
 /**
- * Behat\Mink container compilation pass. Registers all available in controller Mink drivers.
+ * Behat\Mink container compilation pass. Registers all available in controller Mink sessions.
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkPass implements CompilerPassInterface
+class SessionsPass implements CompilerPassInterface
 {
     /**
      * Processes container.
@@ -32,19 +32,20 @@ class MinkPass implements CompilerPassInterface
         if (!$container->hasDefinition('behat.mink')) {
             return;
         }
-
         $minkDefinition = $container->getDefinition('behat.mink');
-        $defaultDriver  = $container->getParameter('behat.mink.default_driver');
 
-        foreach ($container->findTaggedServiceIds('behat.mink.driver') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('behat.mink.session') as $id => $attributes) {
             foreach ($attributes as $attribute) {
-                if (isset($attribute['alias']) && $alias = $attribute['alias']) {
-                    $isDefault = $defaultDriver == $alias;
+                if (isset($attribute['alias']) && $name = $attribute['alias']) {
                     $minkDefinition->addMethodCall(
-                        'registerDriver', array($alias, new Reference($id), $isDefault)
+                        'registerSession', array($name, new Reference($id))
                     );
                 }
             }
         }
+
+        $minkDefinition->addMethodCall(
+            'setDefaultSessionName', array($container->getParameter('behat.mink.default_session'))
+        );
     }
 }

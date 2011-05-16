@@ -15,19 +15,21 @@
     </parameters>
     <services>
 
-        <service id="behat.mink.driver.sahi" class="%behat.mink.driver.sahi.class%"
-            scope="prototype">
-            <argument>%behat.mink.start_url%</argument>
-            <argument>%behat.mink.browser_name%</argument>
-            <argument type="service" id="behat.sahi" />
-            <tag name="behat.mink.driver" alias="sahi"/>
+        <service id="behat.mink.session.sahi" class="%behat.mink.session.class%" scope="prototype">
+            <argument type="service">
+                <service class="%behat.mink.driver.sahi.class%" scope="prototype">
+                    <argument>%behat.mink.start_url%</argument>
+                    <argument>%behat.mink.browser_name%</argument>
+                    <argument type="service" id="behat.sahi" />
+                </service>
+            </argument>
+            <argument type="service" id="behat.mink.selectors_handler" />
+            <tag name="behat.mink.session" alias="sahi" />
         </service>
 
-        <service id="behat.sahi" class="%behat.sahi.class%"
-            scope="prototype">
+        <service id="behat.sahi" class="%behat.sahi.class%" scope="prototype">
             <argument type="service">
-                <service class="%behat.sahi.connection.class%"
-                    scope="prototype">
+                <service class="%behat.sahi.connection.class%" scope="prototype">
                     <argument>%behat.sahi.sid%</argument>
                     <argument>%behat.sahi.host%</argument>
                     <argument>%behat.sahi.port%</argument>

@@ -4,15 +4,17 @@ namespace Behat\MinkBundle\Tests;
 
 use Behat\MinkBundle\Test\MinkTestCase;
 
-abstract class BaseDriverTestCase extends MinkTestCase
+abstract class BaseSessionTestCase extends MinkTestCase
 {
     protected $base;
 
-    abstract protected function getDriverName();
+    abstract protected function getSessionName();
 
     protected function setUp()
     {
-        static::$mink->switchToDriver(static::getDriverName());
+        parent::setUp();
+
+        static::$mink->setDefaultSessionName(static::getSessionName());
         $this->base = static::$kernel->getContainer()->getParameter('behat.mink.start_url');
     }
 

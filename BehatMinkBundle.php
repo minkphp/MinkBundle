@@ -5,9 +5,8 @@ namespace Behat\MinkBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\HttpKernel\Bundle\Bundle;
 
-use Behat\MinkBundle\DependencyInjection\Compiler\MinkPass,
-    Behat\MinkBundle\DependencyInjection\Compiler\SelectorsHandlerPass,
-    Behat\MinkBundle\DependencyInjection\Compiler\SahiDriverPass;
+use Behat\MinkBundle\DependencyInjection\Compiler\SessionsPass,
+    Behat\MinkBundle\DependencyInjection\Compiler\SelectorsHandlerPass;
 
 /*
  * This file is part of the Behat\MinkBundle
@@ -34,8 +33,7 @@ class BehatMinkBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new MinkPass());
+        $container->addCompilerPass(new SessionsPass());
         $container->addCompilerPass(new SelectorsHandlerPass());
-        $container->addCompilerPass(new SahiDriverPass());
     }
 }
