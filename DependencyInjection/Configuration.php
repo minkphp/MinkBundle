@@ -22,18 +22,41 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder,
 class Configuration implements ConfigurationInterface
 {
     /**
+     * Is start_url parameter required.
+     *
+     * @var     Boolean
+     */
+    private $startUrlRequired;
+
+    /**
+     * Initialize configuration.
+     *
+     * @param   Boolean $startUrlRequired   is start_url parameter required
+     */
+    public function __construct($startUrlRequired)
+    {
+        $this->startUrlRequired = $startUrlRequired;
+    }
+
+    /**
      * Returns configuration tree.
      *
      * @return  Symfony\Component\Config\Definition\Builder\TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder      = new TreeBuilder();
+        $startUrlRequired = $this->startUrlRequired;
 
-        return $treeBuilder->root('behat_mink', 'array')->
+        return $treeBuilder->root('behat_mink')->
             children()->
                 scalarNode('start_url')->
-                    isRequired()->
+                    validate()->
+                        ifTrue(function($v) use($startUrlRequired) {
+                            return null === $v && $startUrlRequired;
+                        })->
+                        thenInvalid('start_url is required for Goutte and Sahi sessions at behat_mink')->
+                    end()->
                 end()->
                 scalarNode('default_session')->
                     defaultValue('symfony')->

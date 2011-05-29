@@ -32,12 +32,10 @@ class BehatMinkExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        if (!$this->isMinkConfigIncluded($configs)) {
-            return;
-        }
+        array_unshift($configs, array('start_url' => null));
 
         $processor      = new Processor();
-        $configuration  = new Configuration();
+        $configuration  = new Configuration($this->isStartUrlRequired($configs));
         $config         = $processor->processConfiguration($configuration, $configs);
 
         $loader = $this->getFileLoader($container);
@@ -66,15 +64,16 @@ class BehatMinkExtension extends Extension
     }
 
     /**
-     * Whether or not any mink config was included.
+     * Whether or not start_url parameter required.
      *
-     * Used so that if mink isn't specifically enabled in the config, it's
-     * not loaded at all.
+     * @param   array   $configs
+     *
+     * @return  Boolean
      */
-    private function isMinkConfigIncluded(array $configs)
+    private function isStartUrlRequired(array $configs)
     {
         foreach ($configs as $config) {
-            if (!empty($config)) {
+            if (array_key_exists('goutte', $config) || array_key_exists('sahi', $config)) {
                 return true;
             }
         }
