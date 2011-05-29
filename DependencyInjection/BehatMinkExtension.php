@@ -32,6 +32,10 @@ class BehatMinkExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        if (!$this->isMinkConfigIncluded($configs)) {
+            return;
+        }
+
         $processor      = new Processor();
         $configuration  = new Configuration();
         $config         = $processor->processConfiguration($configuration, $configs);
@@ -59,6 +63,23 @@ class BehatMinkExtension extends Extension
         $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
         $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
         $container->setParameter('mink.paths.lib', $minkLibPath);
+    }
+
+    /**
+     * Whether or not any mink config was included.
+     *
+     * Used so that if mink isn't specifically enabled in the config, it's
+     * not loaded at all.
+     */
+    private function isMinkConfigIncluded(array $configs)
+    {
+        foreach ($configs as $config) {
+            if (!empty($config)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
