@@ -2,6 +2,8 @@
 
 namespace Behat\MinkBundle\Driver;
 
+use Symfony\Component\BrowserKit\Client;
+
 use Behat\Mink\Driver\GoutteDriver;
 
 /*
@@ -20,6 +22,16 @@ use Behat\Mink\Driver\GoutteDriver;
  */
 class SymfonyDriver extends GoutteDriver
 {
+    /**
+     * Initializes Goutte driver.
+     *
+     * @param   Symfony\Component\BrowserKit\Client $client     BrowserKit client instance
+     */
+    public function __construct(Client $client = null)
+    {
+        parent::__construct('/', $client);
+    }
+
     /**
      * {@inheritdoc}
      *

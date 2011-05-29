@@ -23,7 +23,6 @@
         <service id="behat.mink.session.symfony" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.symfony.class%" scope="prototype">
-                    <argument>%behat.mink.start_url%</argument>
                     <argument type="service" id="behat.test_client" />
                 </service>
             </argument>
