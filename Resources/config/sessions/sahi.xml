@@ -18,7 +18,6 @@
         <service id="behat.mink.session.sahi" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.sahi.class%" scope="prototype">
-                    <argument>%behat.mink.start_url%</argument>
                     <argument>%behat.mink.browser_name%</argument>
                     <argument type="service" id="behat.sahi" />
                 </service>

@@ -29,7 +29,7 @@ class SymfonyDriver extends GoutteDriver
      */
     public function __construct(Client $client = null)
     {
-        parent::__construct('/', $client);
+        parent::__construct($client);
     }
 
     /**

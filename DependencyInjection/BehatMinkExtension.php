@@ -32,10 +32,8 @@ class BehatMinkExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        array_unshift($configs, array('start_url' => null));
-
         $processor      = new Processor();
-        $configuration  = new Configuration($this->isStartUrlRequired($configs));
+        $configuration  = new Configuration();
         $config         = $processor->processConfiguration($configuration, $configs);
 
         $loader = $this->getFileLoader($container);
@@ -61,24 +59,6 @@ class BehatMinkExtension extends Extension
         $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
         $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
         $container->setParameter('mink.paths.lib', $minkLibPath);
-    }
-
-    /**
-     * Whether or not start_url parameter required.
-     *
-     * @param   array   $configs
-     *
-     * @return  Boolean
-     */
-    private function isStartUrlRequired(array $configs)
-    {
-        foreach ($configs as $config) {
-            if (array_key_exists('goutte', $config) || array_key_exists('sahi', $config)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

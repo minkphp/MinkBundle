@@ -15,7 +15,6 @@
         <service id="behat.mink.session.goutte" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.goutte.class%" scope="prototype">
-                    <argument>%behat.mink.start_url%</argument>
                     <argument type="service" id="behat.goutte" />
                 </service>
             </argument>
