@@ -12,7 +12,7 @@
         <parameter key="behat.test_client.class">Behat\MinkBundle\Client</parameter>
 
         <parameter key="behat.mink.default_session">symfony</parameter>
-        <parameter key="behat.mink.start_url">null</parameter>
+        <parameter key="behat.mink.base_url">null</parameter>
         <parameter key="behat.mink.browser_name">firefox</parameter>
 
     </parameters>

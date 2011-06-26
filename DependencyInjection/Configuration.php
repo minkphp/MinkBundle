@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder->root('behat_mink')->
             children()->
-                scalarNode('start_url')->
+                scalarNode('base_url')->
                     defaultNull()->
                 end()->
                 scalarNode('default_session')->
