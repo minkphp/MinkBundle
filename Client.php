@@ -2,7 +2,8 @@
 
 namespace Behat\MinkBundle;
 
-use Symfony\Bundle\FrameworkBundle\Client as BaseClient;
+use Symfony\Bundle\FrameworkBundle\Client as BaseClient,
+    Symfony\Component\BrowserKit\Request;
 
 /*
  * This file is part of the Behat\MinkBundle
@@ -28,5 +29,19 @@ class Client extends BaseClient
     protected function doRequest($request)
     {
         return $this->getKernel()->handle($request);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Sets server variables from request headers.
+     */
+    protected function filterRequest(Request $request)
+    {
+        foreach ($request->getServer() as $name => $value) {
+            $_SERVER[$name] = $value;
+        }
+
+        return parent::filterRequest($request);;
     }
 }
