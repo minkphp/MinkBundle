@@ -48,4 +48,11 @@ class TestsController extends Controller
             'speciality' => $data['speciality']
         ));
     }
+
+    public function headersAction()
+    {
+        return $this->render('BehatMinkBundle::headers.html.twig', array(
+            'headers' => var_export($_SERVER, true)
+        ));
+    }
 }

@@ -14,3 +14,6 @@ _behat_tests_submit:
   pattern:  /_behat/tests/submit
   defaults: { _controller: Behat\MinkBundle\Tests\Controller\TestsController::submitAction }
 
+_behat_tests_headers:
+  pattern:  /_behat/tests/headers
+  defaults: { _controller: Behat\MinkBundle\Tests\Controller\TestsController::headersAction }
