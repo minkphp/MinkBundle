@@ -46,6 +46,44 @@ class SymfonyDriver extends GoutteDriver
     /**
      * {@inheritdoc}
      */
+    public function setRequestHeader($name, $value)
+    {
+        switch ($name) {
+            case 'Accept':
+                $name = 'HTTP_ACCEPT';
+                break;
+            case 'Accept-Charset':
+                $name = 'HTTP_ACCEPT_CHARSET';
+                break;
+            case 'Accept-Encoding':
+                $name = 'HTTP_ACCEPT_ENCODING';
+                break;
+            case 'Accept-Language':
+                $name = 'HTTP_ACCEPT_LANGUAGE';
+                break;
+            case 'Connection':
+                $name = 'HTTP_CONNECTION';
+                break;
+            case 'Host':
+                $name = 'HTTP_HOST';
+                break;
+            case 'User-Agent':
+                $name = 'HTTP_USER_AGENT';
+                break;
+            case 'Authorization':
+                $name = 'PHP_AUTH_DIGEST';
+                break;
+            default:
+                $name = null;
+                break;
+        }
+
+        $this->getClient()->setServerParameter($name, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getStatusCode()
     {
         return $this->getClient()->getResponse()->getStatusCode();
