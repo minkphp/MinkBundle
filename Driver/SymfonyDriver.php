@@ -35,11 +35,11 @@ class SymfonyDriver extends GoutteDriver
     /**
      * {@inheritdoc}
      *
-     * removes "*.php/" from urls and the passes it to GoutteDriver::visit().
+     * removes "*.php/" from urls and then passes it to GoutteDriver::visit().
      */
     public function visit($url)
     {
-        $url = preg_replace('/[^\/]+\.php\//', '', $url);
+        $url = preg_replace('/^https?\:\/\/[^\/]+(.+\.php)?/', '', $url);
         parent::visit($url);
     }
 
