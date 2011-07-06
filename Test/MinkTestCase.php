@@ -19,7 +19,7 @@ use Symfony\Component\Finder\Finder,
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkTestCase extends \PHPUnit_Framework_TestCase
+abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
 {
     protected static $mink;
     protected static $kernel;
