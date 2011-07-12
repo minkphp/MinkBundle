@@ -78,7 +78,9 @@ class SymfonyDriver extends GoutteDriver
                 break;
         }
 
-        $this->getClient()->setServerParameter($name, $value);
+        if (null === $name) {
+            $this->getClient()->setServerParameter($name, $value);
+        }
     }
 
     /**
