@@ -73,14 +73,9 @@ class SymfonyDriver extends GoutteDriver
             case 'Authorization':
                 $name = 'PHP_AUTH_DIGEST';
                 break;
-            default:
-                $name = null;
-                break;
         }
 
-        if (null === $name) {
-            $this->getClient()->setServerParameter($name, $value);
-        }
+        $this->getClient()->setServerParameter($name, $value);
     }
 
     /**
