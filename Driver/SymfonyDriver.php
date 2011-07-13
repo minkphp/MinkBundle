@@ -49,7 +49,7 @@ class SymfonyDriver extends GoutteDriver
     public function setAuth($user, $password, $type)
     {
         $this->getClient()->setServerParameter('PHP_AUTH_USER', $user);
-        $this->getClient()->setServerParameter('PHP_AUTH_PW',   $password);
+        $this->getClient()->setServerParameter('PHP_AUTH_PW', $password);
     }
 
     /**
