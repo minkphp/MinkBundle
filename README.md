@@ -10,14 +10,14 @@ See [Behat official site](http://behat.org) for more info.
 
 ## Installation
 
-### Add Behat\Mink and Behat\MinkBundle into your vendors dir.
+### Add Behat\Mink and Behat\MinkBundle to your vendors dir
 
 ``` bash
 git submodule add -f git://github.com/Behat/Mink.git vendor/Behat/Mink
 git submodule add -f git://github.com/Behat/MinkBundle.git vendor/Behat/MinkBundle
 ```
 
-### Add Behat\Mink and Behat\MinkBundle namespaces to autoload
+### Add Behat\Mink and Behat\MinkBundle namespaces to autoload.php
 
 ``` php
 <?php
@@ -42,24 +42,24 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 }
 ```
 
-### Enable MinkBundle and test.client in your configuration:
+### Enable BehatMinkBundle and test.client in your configuration:
 
 ``` yml
 # app/config/config_dev.yml
 framework:
-    test:       ~
+    test:  ~
 
 # ...
 
 behat_mink:
-    start_url:  http://your_app_local.url/app_dev.php/
+    base_url:  http://your_app_local.url/app_dev.php/
 ```
 
-By default, Mink will use Symfony2 test.client to test your application, but you can enable and
-use other sessions anytime during testsuite run.
+By default, Mink will use Symfony2's test.client service to test your application, but you can enable and
+use other sessions when running the test suite.
 
-Notice, that `start_url` is required parameter for any Mink session. Best practice is to create new
-front controller for testing needs:
+Notice, that `base_url` is a required parameter for any Mink session. The best practice is to create a new
+frontend controller for testing needs:
 
 ``` php
 <?php
@@ -79,30 +79,29 @@ $kernel = new AppKernel('test', true);
 $kernel->handle(Request::createFromGlobals())->send();
 ```
 
-and use it in your test suites (front controller will be used by Goutte and Sahi sessions):
+Change the `base_url` parameter to use this frontend controller in your test suits (including Goutte and Sahi sessions):
 
 ``` yml
 # ...
 
 behat_mink:
-    start_url:  http://your_app_local.url/app_test.php/
+    base_url:  http://your_app_local.url/app_test.php/
 ```
 
 ## GoutteSession
 
-By default all Mink actions will be runed against Symfony2 test.client, which **will not** reboot
-kernel between requests. But what if you want to isolate your test suite from real application and,
-what's even more important, to isolate different requests and responses from each others. Then you
-need to use Goutte session.
+By default, all Mink actions will be run against Symfony2's test.client service, which **will not** reboot
+the kernel between requests. But what if you want to isolate your test suite from real application and,
+more importantly, isolate different requests and responses from each other? Then you'll need to use Goutte session.
 
-### Add Goutte and Zend libraries to your vendors dir.
+### Add Goutte and Zend libraries to your vendors dir
 
 ``` bash
 git submodule add -f git://github.com/fabpot/Goutte.git vendor/Goutte
 git submodule add -f git://github.com/zendframework/zf2.git vendor/Zend
 ```
 
-### Add Goutte and Zend namespaces to autoload
+### Add Goutte and Zend namespaces to autoload.php
 
 ``` php
 <?php
@@ -121,24 +120,23 @@ $loader->registerNamespaces(array(
 # ...
 
 behat_mink:
-    start_url:  http://your_app_local.url/app_test.php/
-    goutte:     ~
+    base_url:  http://your_app_local.url/app_test.php/
+    goutte:    ~
 ```
 
 ## SahiSession
 
-Sometimes, headless browser emulators are not enough to test your complex applications. Especially
-in case when you want to test AJAX or JS functionality. Sahi session comes to rescue! So, you need to
-enable it...
+Sometimes, headless browser emulators are not enough to test your complex application, especially when
+you want to test AJAX or JS functionality. Sahi session comes to the rescue!
 
-### Add Behat\SahiClient and Buzz libraries to your vendors dir.
+### Add Behat\SahiClient and Buzz libraries to your vendors dir
 
 ``` bash
 git submodule add -f git://github.com/Behat/SahiClient.git vendor/Behat/SahiClient
 git submodule add -f git://github.com/kriswallsmith/Buzz.git vendor/Buzz
 ```
 
-### Add Behat\SahiClient and Buzz namespaces to autoload
+### Add Behat\SahiClient and Buzz namespaces to autoload.php
 
 ``` php
 <?php
@@ -157,14 +155,14 @@ $loader->registerNamespaces(array(
 # ...
 
 behat_mink:
-    start_url:  http://your_app_local.url/app_test.php/
-    goutte:     ~   # enable both Goutte
-    sahi:       ~   # and Sahi session
+    base_url: http://your_app_local.url/app_test.php/
+    goutte:   ~   # enable both Goutte
+    sahi:     ~   # and Sahi session
 ```
 
-## Writing first test
+## Writing your first test
 
-How to write your first Mink test case? Simple! Use bundled with MinkBundle `MinkTestCase`:
+Writing your first Mink test case is simple! Use MinkBundle's `MinkTestCase` class:
 
 ``` php
 <?php
@@ -252,10 +250,10 @@ class AcmeWebTestCase extends MinkTestCase
 }
 ```
 
-For further learning, read [http://docs.behat.org/api/mink/index.html](Mink API docs).
+For further learning, read the [http://docs.behat.org/api/mink/index.html](Mink API docs).
 
 ## CREDITS
 
-List of developers who contributed:
+List of developers who have contributed:
 
 - Konstantin Kudryashov (ever.zet@gmail.com)
