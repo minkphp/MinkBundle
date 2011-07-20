@@ -113,7 +113,7 @@ Now it's time to install and setup ``MinkBundle`` itself.
 
         $loader->registerNamespaces(array(
         //...
-            'Behat\MinkBundle' => __DIR__.'/../bundles',
+            'Behat\MinkBundle' => __DIR__.'/../vendor/bundles',
         //...
         ));
 
