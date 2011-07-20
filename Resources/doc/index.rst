@@ -176,70 +176,72 @@ provided with it as a base class for your tests:
                 ->getParameter('behat.mink.start_url');
         }
 
-        public function testSimpleBrowsing()
-        {
-            /* 1. CHOOSE SESSION:
+        // write functional tests
+    }
 
-            Symfony2 test.client session will be used by
-            default, so getSession() without parameters
-            will return test.client session for you in any
-            place of your app.
+Base ``Behat\MinkBundle\Test\MinkTestCase`` class provides an easy way to get
+``$mink`` and specific session instances in your tests:
 
-                $session = $this->getSession();
+1. ``symfony`` session will be used by default, so ``getSession()`` without
+   parameters will return ``test.client`` enabled session for you:
 
-            OR with more verbose version:
+   .. code-block:: php
 
-                $session = $this->getSession('symfony');
+     $session = $this->getSession();
+     // or you can use the more verbose call:
+     $session = $this->getSession('symfony');
 
-            Also, you can use headless goutte session,
-            which will make real HTTP requests against your
-            Symfony2 application:
+2. If you want to test your application with **real** HTTP requests, you should
+   use ``goutte`` session:
 
-                $session = $this->getSession('goutte');
+   .. code-block:: php
 
-            OR even to JS-enabled in-browser Sahi session,
-            which will start real browser and make real
-            requests through it:
+     $session = $this->getSession('goutte');
 
-                $session = $this->getSession('sahi');
+3. Or if you want to test your app running in real browser - use ``sahi``
+   session:
 
-            */
+   .. code-block:: php
 
-            // 2. DO ACTIONS (all actions below works similar
-            for ALL Mink sessions):
+     $session = $this->getSession('sahi');
 
-            $session = $this->getSession();
+After you've choosen needed session - use it to perform actions on your
+Symfony2 app:
 
-            $session
-                ->visit($this->base.'_behat/tests/page/page1');
-            $this->assertTrue(
-                $session->getPage()->hasContent('Page N1')
-            );
+.. code-block:: php
 
-            $session->getPage()->clickLink('p10');
-        }
+    $session
+        ->visit($this->base.'_behat/tests/page/page1');
+    $this->assertTrue(
+        $session->getPage()->hasContent('Page N1')
+    );
 
-        public function testForms()
-        {
-            $session = $this->getSession();
+    $session->getPage()->clickLink('p10');
 
-            $session->visit($this->base . '_behat/tests/form');
-            $page = $session->getPage();
+For example, spec form test with ``symfony`` session will look like that:
 
-            // 3. FILL FORMS:
+.. code-block:: php
 
-            $page->fillField('name', 'ever');
-            $page->fillField('age', '23');
-            $page->selectFieldOption('speciality', 'programmer');
-            $page->clickButton('Send spec info');
+    public function testForms()
+    {
+        $session = $this->getSession();
 
-            // 4. ASSERT RESPONSE:
+        $session->visit($this->base . '_behat/tests/form');
+        $page = $session->getPage();
 
-            $this->assertTrue(
-                $page->hasContent('POST recieved')
-            );
-            $this->assertTrue(
-                $page->hasContent('ever is 23 years old programmer')
-            );
-        }
+        // 3. FILL FORMS:
+
+        $page->fillField('name', 'ever');
+        $page->fillField('age', '23');
+        $page->selectFieldOption('speciality', 'programmer');
+        $page->clickButton('Send spec info');
+
+        // 4. ASSERT RESPONSE:
+
+        $this->assertTrue(
+            $page->hasContent('POST recieved')
+        );
+        $this->assertTrue(
+            $page->hasContent('ever is 23 years old programmer')
+        );
     }
