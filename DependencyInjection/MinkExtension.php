@@ -22,7 +22,7 @@ use Symfony\Component\Config\Definition\Processor,
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class BehatMinkExtension extends Extension
+class MinkExtension extends Extension
 {
     /**
      * Loads the services based on your application configuration.

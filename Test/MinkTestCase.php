@@ -5,6 +5,9 @@ namespace Behat\MinkBundle\Test;
 use Symfony\Component\Finder\Finder,
     Symfony\Component\HttpKernel\HttpKernelInterface;
 
+use Behat\Mink\Mink,
+    Behat\Mink\PHPUnit\TestCase as BaseMinkTestCase;
+
 /*
  * This file is part of the Behat\MinkBundle
  *
@@ -19,50 +22,47 @@ use Symfony\Component\Finder\Finder,
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
+abstract class MinkTestCase extends BaseMinkTestCase
 {
-    protected static $mink;
-    protected static $kernel;
+    private static $kernelClass;
+    private static $kernel;
+    private static $mink;
 
     /**
-     * Creates mink and kernel instances and map them to protected properties.
+     * {@inheritdoc}
      */
     public static function setUpBeforeClass()
     {
         static::$kernel = static::createKernel();
-        static::$mink   = static::createMink(static::$kernel);
-    }
 
-    /**
-     * Reset current mink driver after every test case.
-     */
-    protected function teardown()
-    {
-        if (null !== static::$mink && static::$mink->getSession()->isStarted()) {
-            static::$mink->getSession()->reset();
+        if (null === static::$mink) {
+            static::$mink = static::$kernel->getContainer()->get('behat.mink');
         }
     }
 
     /**
-     * Stop all mink drivers after current test cases.
+     * Returns kernel instance.
+     *
+     * @return  HttpKernelInterface A HttpKernelInterface instance
      */
-    public static function tearDownAfterClass()
+    public function getKernel()
     {
-        if (null !== static::$mink) {
-            static::$mink->stopSessions();
-        }
+        return static::$kernel;
     }
 
     /**
-     * Creates mink instance from kernel.
-     *
-     * @param   Symfony\Component\HttpKernel\HttpKernelInterface    $kernel kernel instance
-     *
-     * @return  Behat\Mink\Mink
+     * {@inheritdoc}
      */
-    protected static function createMink(HttpKernelInterface $kernel)
+    public function getMink()
     {
-        return $kernel->getContainer()->get('behat.mink');
+        return static::$mink;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerSessions(Mink $mink)
+    {
     }
 
     /**
@@ -75,8 +75,11 @@ abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
      */
     protected static function createKernel($environment = 'test', $debug = true)
     {
-        $class  = static::getKernelClass();
-        $kernel = new $class($environment, $debug);
+        if (null === static::$kernelClass) {
+            static::$kernelClass = static::getKernelClass();
+        }
+
+        $kernel = new static::$kernelClass($environment, $debug);
         $kernel->boot();
 
         return $kernel;
@@ -94,7 +97,7 @@ abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
         $dir = isset($_SERVER['KERNEL_DIR']) ? $_SERVER['KERNEL_DIR'] : static::getPhpUnitXmlDir();
 
         $finder = new Finder();
-        $finder->name('*Kernel.php')->in($dir);
+        $finder->name('*Kernel.php')->depth(0)->in($dir);
         if (!count($finder)) {
             throw new \RuntimeException('You must override the WebTestCase::createKernel() method.');
         }
@@ -117,7 +120,6 @@ abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
      */
     private static function getPhpUnitXmlDir()
     {
-        $dir = null;
         if (!isset($_SERVER['argv']) || false === strpos($_SERVER['argv'][0], 'phpunit')) {
             throw new \RuntimeException('You must override the WebTestCase::createKernel() method.');
         }

@@ -22,7 +22,7 @@ use Behat\MinkBundle\DependencyInjection\Compiler\SessionsPass,
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class BehatMinkBundle extends Bundle
+class MinkBundle extends Bundle
 {
     /**
      * Registers compilation passes.
