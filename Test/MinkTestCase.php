@@ -33,10 +33,10 @@ abstract class MinkTestCase extends BaseMinkTestCase
      */
     public static function setUpBeforeClass()
     {
-        static::$kernel = static::createKernel();
+        self::$kernel = static::createKernel();
 
-        if (null === static::$mink) {
-            static::$mink = static::$kernel->getContainer()->get('behat.mink');
+        if (null === self::$mink) {
+            self::$mink = self::$kernel->getContainer()->get('behat.mink');
         }
     }
 
@@ -45,9 +45,9 @@ abstract class MinkTestCase extends BaseMinkTestCase
      *
      * @return  HttpKernelInterface A HttpKernelInterface instance
      */
-    public function getKernel()
+    public static function getKernel()
     {
-        return static::$kernel;
+        return self::$kernel;
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class MinkTestCase extends BaseMinkTestCase
      */
     public function getMink()
     {
-        return static::$mink;
+        return self::$mink;
     }
 
     /**
@@ -75,11 +75,11 @@ abstract class MinkTestCase extends BaseMinkTestCase
      */
     protected static function createKernel($environment = 'test', $debug = true)
     {
-        if (null === static::$kernelClass) {
-            static::$kernelClass = static::getKernelClass();
+        if (null === self::$kernelClass) {
+            self::$kernelClass = static::getKernelClass();
         }
 
-        $kernel = new static::$kernelClass($environment, $debug);
+        $kernel = new self::$kernelClass($environment, $debug);
         $kernel->boot();
 
         return $kernel;
