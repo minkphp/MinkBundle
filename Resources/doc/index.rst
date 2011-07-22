@@ -56,6 +56,7 @@ to use ``GoutteDriver``, you'll need to also add:
         target=/goutte
     [zend]
         git=https://github.com/zendframework/zf2.git
+        target=/zend
 
 And if you want to use ``SahiDriver``, you'll need to add another 2 lines:
 
