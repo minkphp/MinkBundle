@@ -38,6 +38,9 @@ class Configuration implements ConfigurationInterface
                 scalarNode('show_cmd')->
                     defaultNull()->
                 end()->
+                scalarNode('show_tmp_dir')->
+                    defaultValue('%kernel.root_dir%/cache')->
+                end()->
                 scalarNode('default_session')->
                     defaultValue('symfony')->
                 end()->

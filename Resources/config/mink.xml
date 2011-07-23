@@ -14,6 +14,7 @@
         <parameter key="behat.mink.default_session">symfony</parameter>
         <parameter key="behat.mink.base_url">null</parameter>
         <parameter key="behat.mink.show_cmd">null</parameter>
+        <parameter key="behat.mink.show_tmp_dir">%kernel.root_dir%/cache</parameter>
         <parameter key="behat.mink.browser_name">firefox</parameter>
 
     </parameters>
