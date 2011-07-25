@@ -29,7 +29,12 @@ class SymfonyDriver extends GoutteDriver
      */
     public function __construct(Client $client = null)
     {
-        parent::__construct($client);
+        // create new kernel, that could be easily rebooted
+        $class  = get_class($client->getKernel());
+        $kernel = new $class('test', true);
+        $kernel->boot();
+
+        parent::__construct($kernel->getContainer()->get('test.client'));
     }
 
     /**
@@ -41,6 +46,17 @@ class SymfonyDriver extends GoutteDriver
     {
         $url = preg_replace('/^https?\:\/\/[^\/]+(.+\.php)?/', '', $url);
         parent::visit($url);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset()
+    {
+        parent::reset();
+
+        $this->getClient()->getKernel()->shutdown();
+        $this->getClient()->getKernel()->boot();
     }
 
     /**
