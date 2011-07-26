@@ -5,12 +5,12 @@
     <parameters>
 
         <parameter key="behat.mink.driver.sahi.class">Behat\Mink\Driver\SahiDriver</parameter>
-        <parameter key="behat.sahi.class">Behat\SahiClient\Client</parameter>
-        <parameter key="behat.sahi.connection.class">Behat\SahiClient\Connection</parameter>
+        <parameter key="behat.mink.sahi.class">Behat\SahiClient\Client</parameter>
+        <parameter key="behat.mink.sahi.connection.class">Behat\SahiClient\Connection</parameter>
 
-        <parameter key="behat.sahi.sid">null</parameter>
-        <parameter key="behat.sahi.host">localhost</parameter>
-        <parameter key="behat.sahi.port">9999</parameter>
+        <parameter key="behat.mink.sahi.sid">null</parameter>
+        <parameter key="behat.mink.sahi.host">localhost</parameter>
+        <parameter key="behat.mink.sahi.port">9999</parameter>
 
     </parameters>
     <services>
@@ -19,19 +19,19 @@
             <argument type="service">
                 <service class="%behat.mink.driver.sahi.class%" scope="prototype">
                     <argument>%behat.mink.browser_name%</argument>
-                    <argument type="service" id="behat.sahi" />
+                    <argument type="service" id="behat.mink.sahi" />
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selectors_handler" />
             <tag name="behat.mink.session" alias="sahi" />
         </service>
 
-        <service id="behat.sahi" class="%behat.sahi.class%" scope="prototype">
+        <service id="behat.mink.sahi" class="%behat.mink.sahi.class%" scope="prototype">
             <argument type="service">
-                <service class="%behat.sahi.connection.class%" scope="prototype">
-                    <argument>%behat.sahi.sid%</argument>
-                    <argument>%behat.sahi.host%</argument>
-                    <argument>%behat.sahi.port%</argument>
+                <service class="%behat.mink.sahi.connection.class%" scope="prototype">
+                    <argument>%behat.mink.sahi.sid%</argument>
+                    <argument>%behat.mink.sahi.host%</argument>
+                    <argument>%behat.mink.sahi.port%</argument>
                 </service>
             </argument>
         </service>

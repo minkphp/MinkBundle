@@ -5,9 +5,9 @@
     <parameters>
 
         <parameter key="behat.mink.driver.goutte.class">Behat\Mink\Driver\GoutteDriver</parameter>
-        <parameter key="behat.goutte.class">Goutte\Client</parameter>
-        <parameter key="behat.goutte.zend_config" type="collection"></parameter>
-        <parameter key="behat.goutte.server_parameters" type="collection"></parameter>
+        <parameter key="behat.mink.goutte.class">Goutte\Client</parameter>
+        <parameter key="behat.mink.goutte.zend_config" type="collection"></parameter>
+        <parameter key="behat.mink.goutte.server_parameters" type="collection"></parameter>
 
     </parameters>
     <services>
@@ -15,17 +15,17 @@
         <service id="behat.mink.session.goutte" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.goutte.class%" scope="prototype">
-                    <argument type="service" id="behat.goutte" />
+                    <argument type="service" id="behat.mink.goutte" />
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selectors_handler" />
             <tag name="behat.mink.session" alias="goutte" />
         </service>
 
-        <service id="behat.goutte" class="%behat.goutte.class%"
+        <service id="behat.mink.goutte" class="%behat.mink.goutte.class%"
             scope="prototype">
-            <argument>%behat.goutte.zend_config%</argument>
-            <argument>%behat.goutte.server_parameters%</argument>
+            <argument>%behat.mink.goutte.zend_config%</argument>
+            <argument>%behat.mink.goutte.server_parameters%</argument>
         </service>
 
     </services>
