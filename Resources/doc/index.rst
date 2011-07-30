@@ -174,7 +174,7 @@ provided with it as a base class for your tests:
 
             $this->base = $this->getKernel()
                 ->getContainer()
-                ->getParameter('behat.mink.start_url');
+                ->getParameter('behat.mink.base_url');
         }
 
         // write functional tests
