@@ -235,7 +235,7 @@ For example, spec form test with ``symfony`` session will look like that:
         $page->fillField('name', 'ever');
         $page->fillField('age', '23');
         $page->selectFieldOption('speciality', 'programmer');
-        $page->clickButton('Send spec info');
+        $page->pressButton('Send spec info');
 
         // 4. ASSERT RESPONSE:
 
