@@ -1,5 +1,5 @@
 Provides Behat\Mink browser abstraction library for your Symfony2 project.
-See [Behat official site](http://behat.org) for more info.
+See [Mink official site](http://mink.behat.org) for more info.
 
 ## Features
 
