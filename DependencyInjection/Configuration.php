@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        return $treeBuilder->root('behat_mink')->
+        return $treeBuilder->root('mink')->
             children()->
                 scalarNode('base_url')->
                     defaultNull()->

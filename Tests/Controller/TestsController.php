@@ -22,7 +22,7 @@ class TestsController extends Controller
 {
     public function pageAction($page)
     {
-        return $this->render('BehatMinkBundle::page.html.twig', array(
+        return $this->render('MinkBundle::page.html.twig', array(
             'page' => preg_replace('/page(\d+)/', 'Page N\\1', $page)
         ));
     }
@@ -34,14 +34,14 @@ class TestsController extends Controller
 
     public function formAction()
     {
-        return $this->render('BehatMinkBundle::form.html.twig');
+        return $this->render('MinkBundle::form.html.twig');
     }
 
     public function submitAction()
     {
         $data = $this->get('request')->request->all();
 
-        return $this->render('BehatMinkBundle::submit.html.twig', array(
+        return $this->render('MinkBundle::submit.html.twig', array(
             'method'     => $this->get('request')->getMethod(),
             'name'       => $data['name'],
             'age'        => $data['age'],
@@ -51,7 +51,7 @@ class TestsController extends Controller
 
     public function headersAction()
     {
-        return $this->render('BehatMinkBundle::headers.html.twig', array(
+        return $this->render('MinkBundle::headers.html.twig', array(
             'headers' => var_export($_SERVER, true)
         ));
     }
