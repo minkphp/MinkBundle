@@ -45,6 +45,9 @@ class MinkExtension extends Extension
         if (isset($config['sahi'])) {
             $loader->load('sessions/sahi.xml');
         }
+        if (isset($config['zombie'])) {
+            $loader->load('sessions/zombie.xml');
+        }
 
         foreach ($config as $ns => $tlValue) {
             if (!is_array($tlValue)) {

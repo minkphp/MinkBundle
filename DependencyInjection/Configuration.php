@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                     defaultNull()->
                 end()->
                 scalarNode('show_tmp_dir')->
-                    defaultValue('%kernel.root_dir%/cache')->
+                    defaultValue('%kernel.cache_dir%')->
                 end()->
                 scalarNode('default_session')->
                     defaultValue('symfony')->
@@ -69,6 +69,19 @@ class Configuration implements ConfigurationInterface
                         end()->
                         scalarNode('port')->
                             defaultValue(9999)->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('zombie')->
+                    children()->
+                        scalarNode('host')->
+                            defaultValue('127.0.0.1')->
+                        end()->
+                        scalarNode('port')->
+                            defaultValue(8124)->
+                        end()->
+                        scalarNode('node_bin')->
+                            defaultValue('node')->
                         end()->
                     end()->
                 end()->
