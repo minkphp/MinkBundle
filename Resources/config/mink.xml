@@ -12,6 +12,7 @@
         <parameter key="behat.test_client.class">Behat\MinkBundle\Client</parameter>
 
         <parameter key="behat.mink.default_session">symfony</parameter>
+        <parameter key="behat.mink.javascript_session">sahi</parameter>
         <parameter key="behat.mink.base_url">null</parameter>
         <parameter key="behat.mink.show_cmd">null</parameter>
         <parameter key="behat.mink.show_tmp_dir">%kernel.cache_dir%</parameter>

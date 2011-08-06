@@ -44,6 +44,9 @@ class Configuration implements ConfigurationInterface
                 scalarNode('default_session')->
                     defaultValue('symfony')->
                 end()->
+                scalarNode('javascript_session')->
+                    defaultValue('sahi')->
+                end()->
                 scalarNode('browser_name')->
                     defaultValue('firefox')->
                 end()->
