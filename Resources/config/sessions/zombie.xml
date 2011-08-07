@@ -10,6 +10,7 @@
 
         <parameter key="behat.mink.zombie.host">127.0.0.1</parameter>
         <parameter key="behat.mink.zombie.port">8124</parameter>
+        <parameter key="behat.mink.zombie.auto_server">true</parameter>
         <parameter key="behat.mink.zombie.node_bin">node</parameter>
 
     </parameters>
@@ -20,6 +21,7 @@
                 <service class="%behat.mink.driver.zombie.class%" scope="prototype">
                     <argument type="service" id="behat.mink.zombie.connection" />
                     <argument type="service" id="behat.mink.zombie.server" />
+                    <argument type="service" id="behat.mink.zombie.auto_server" />
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selectors_handler" />

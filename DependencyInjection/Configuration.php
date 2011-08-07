@@ -83,6 +83,9 @@ class Configuration implements ConfigurationInterface
                         scalarNode('port')->
                             defaultValue(8124)->
                         end()->
+                        scalarNode('auto_server')->
+                            defaultValue(true)->
+                        end()->
                         scalarNode('node_bin')->
                             defaultValue('node')->
                         end()->
