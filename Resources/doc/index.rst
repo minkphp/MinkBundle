@@ -140,7 +140,8 @@ Now, as you've setted up the bundle, you should configure it:
         base_url:   http://your_app.dev/app_test.php
 
 By default, MinkBundle uses only ``SymfonyDriver`` session. If you want to use
-``GoutteDriver`` or ``SahiDriver`` sessions - you should specify them in config:
+``GoutteDriver``, ``SahiDriver`` or ``ZombieDriver`` sessions - you should
+specify them in config explicitly:
 
 .. code-block:: yaml
 
@@ -149,6 +150,25 @@ By default, MinkBundle uses only ``SymfonyDriver`` session. If you want to use
         base_url:   http://your_app.dev/app_test.php
         goutte:     ~
         sahi:       ~
+        zombie:     ~
+
+Out of the box, Mink will use ``SymfonyDriver`` session as default one. This
+means that any session call without argument:
+
+.. code-block:: php
+
+    $this->getMink()->getSession()->...;
+
+will be done against default Symfony2 ``test.client`` library. If you want to
+change this, use ``default_session`` configuration option:
+
+.. code-block:: yaml
+
+    # app/config/config_test.yml
+    mink:
+        base_url:           http://your_app.dev/app_test.php
+        default_session:    goutte
+        goutte:             ~
 
 Writing your first test
 -----------------------
