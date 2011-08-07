@@ -51,8 +51,10 @@ class TestsController extends Controller
 
     public function headersAction()
     {
+        $headers = $this->getRequest()->headers->all();
+
         return $this->render('MinkBundle::headers.html.twig', array(
-            'headers' => var_export($_SERVER, true)
+            'headers' => var_export($headers, true)
         ));
     }
 }

@@ -33,11 +33,30 @@ abstract class MinkTestCase extends BaseMinkTestCase
      */
     public static function setUpBeforeClass()
     {
-        self::$kernel = static::createKernel();
+        if (null === self::$kernel) {
+            self::$kernel = static::createKernel();
+        }
 
         if (null === self::$mink) {
             self::$mink = self::$kernel->getContainer()->get('behat.mink');
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function tearDownAfterClass()
+    {
+        if (null !== self::$mink) {
+            self::$mink->stopSessions();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function registerSessions(Mink $mink)
+    {
     }
 
     /**
@@ -51,18 +70,27 @@ abstract class MinkTestCase extends BaseMinkTestCase
     }
 
     /**
-     * {@inheritdoc}
+     * Returns container instance.
+     *
+     * @return  ContainerInterface
      */
-    public function getMink()
+    public static function getContainer()
     {
-        return self::$mink;
+        return static::getKernel()->getContainer();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function registerSessions(Mink $mink)
+    public function getMink()
     {
+        if (null === self::$mink) {
+            throw new \RuntimeException(
+                'Mink is not initialized. Forgot to call parent context setUpBeforeClass()?'
+            );
+        }
+
+        return self::$mink;
     }
 
     /**

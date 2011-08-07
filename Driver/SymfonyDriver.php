@@ -73,29 +73,29 @@ class SymfonyDriver extends GoutteDriver
      */
     public function setRequestHeader($name, $value)
     {
-        switch ($name) {
-            case 'Accept':
+        switch (strtolower($name)) {
+            case 'accept':
                 $name = 'HTTP_ACCEPT';
                 break;
-            case 'Accept-Charset':
+            case 'accept-charset':
                 $name = 'HTTP_ACCEPT_CHARSET';
                 break;
-            case 'Accept-Encoding':
+            case 'accept-encoding':
                 $name = 'HTTP_ACCEPT_ENCODING';
                 break;
-            case 'Accept-Language':
+            case 'accept-language':
                 $name = 'HTTP_ACCEPT_LANGUAGE';
                 break;
-            case 'Connection':
+            case 'connection':
                 $name = 'HTTP_CONNECTION';
                 break;
-            case 'Host':
+            case 'host':
                 $name = 'HTTP_HOST';
                 break;
-            case 'User-Agent':
+            case 'user-agent':
                 $name = 'HTTP_USER_AGENT';
                 break;
-            case 'Authorization':
+            case 'authorization':
                 $name = 'PHP_AUTH_DIGEST';
                 break;
         }

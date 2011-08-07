@@ -12,25 +12,23 @@ abstract class BaseSessionTestCase extends MinkTestCase
 
     protected function setUp()
     {
-        parent::setUp();
-
-        static::$mink->setDefaultSessionName(static::getSessionName());
-        $this->base = static::$kernel->getContainer()->getParameter('behat.mink.base_url');
+        $this->getMink()->setDefaultSessionName(static::getSessionName());
+        $this->base = static::getContainer()->getParameter('behat.mink.base_url');
     }
 
     public function testSimpleBrowsing()
     {
-        $session = static::$mink->getSession();
+        $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '_behat/tests/page/page1');
+        $session->visit($this->base . '/_behat/tests/page/page1');
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
         $this->assertFalse($session->getPage()->hasContent('Page N2'));
 
-        $session->visit($this->base . '_behat/tests/page/page2');
+        $session->visit($this->base . '/_behat/tests/page/page2');
         $this->assertTrue($session->getPage()->hasContent('Page N2'));
         $this->assertFalse($session->getPage()->hasContent('Page N1'));
 
-        $session->visit($this->base . '_behat/tests/page/page1');
+        $session->visit($this->base . '/_behat/tests/page/page1');
         $session->getPage()->clickLink('p10');
         $this->assertTrue($session->getPage()->hasContent('Page N10'));
 
@@ -42,23 +40,23 @@ abstract class BaseSessionTestCase extends MinkTestCase
 
     public function testRedirects()
     {
-        $session = static::$mink->getSession();
+        $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '_behat/tests/redirect');
+        $session->visit($this->base . '/_behat/tests/redirect');
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
     }
 
     public function testForms()
     {
-        $session = static::$mink->getSession();
+        $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '_behat/tests/form');
+        $session->visit($this->base . '/_behat/tests/form');
         $page = $session->getPage();
 
         $page->fillField('name', 'ever');
         $page->fillField('age', '23');
         $page->selectFieldOption('speciality', 'manager');
-        $page->clickButton('Send spec info');
+        $page->pressButton('Send spec info');
 
         $this->assertTrue($page->hasContent('POST recieved'));
         $this->assertTrue($page->hasContent('ever is 23 years old manager'));

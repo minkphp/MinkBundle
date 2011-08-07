@@ -26,19 +26,11 @@
         <service id="behat.mink.session.symfony" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.symfony.class%" scope="prototype">
-                    <argument type="service" id="behat.mink.test_client" />
+                    <argument type="service" id="test.client" />
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selectors_handler" />
             <tag name="behat.mink.session" alias="symfony" />
-        </service>
-
-        <service id="behat.mink.test_client" class="%behat.test_client.class%"
-            scope="prototype">
-            <argument type="service" id="kernel" />
-            <argument>%test.client.parameters%</argument>
-            <argument type="service" id="test.client.history" />
-            <argument type="service" id="test.client.cookiejar" />
         </service>
 
         <service id="behat.mink.selectors_handler" class="%behat.mink.selectors_handler.class%" />

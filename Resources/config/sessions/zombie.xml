@@ -21,7 +21,7 @@
                 <service class="%behat.mink.driver.zombie.class%" scope="prototype">
                     <argument type="service" id="behat.mink.zombie.connection" />
                     <argument type="service" id="behat.mink.zombie.server" />
-                    <argument type="service" id="behat.mink.zombie.auto_server" />
+                    <argument>%behat.mink.zombie.auto_server%</argument>
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selectors_handler" />
