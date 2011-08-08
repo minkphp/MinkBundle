@@ -177,8 +177,8 @@ change this, use ``default_session`` configuration option:
     needed requirements for Mink and default ``SymfonyDriver`` enabled out
     of the box.
 
-Configuring MinkBundle
-----------------------
+Available Options
+~~~~~~~~~~~~~~~~~
 
 MinkBundle provides bunch of useful options for you to configure Mink's
 behavior. You can use them to make your testing experience even more
@@ -267,7 +267,7 @@ Symfony2 app:
 .. code-block:: php
 
     $session
-        ->visit($this->base.'_behat/tests/page/page1');
+        ->visit($this->base.'/_behat/tests/page/page1');
     $this->assertTrue(
         $session->getPage()->hasContent('Page N1')
     );
@@ -282,7 +282,7 @@ For example, form specification with ``symfony`` session will look like that:
     {
         $session = $this->getSession();
 
-        $session->visit($this->base . '_behat/tests/form');
+        $session->visit($this->base.'/_behat/tests/form');
         $page = $session->getPage();
 
         // 3. FILL FORMS:
