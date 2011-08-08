@@ -170,6 +170,35 @@ change this, use ``default_session`` configuration option:
         default_session:    goutte
         goutte:             ~
 
+.. note::
+
+    Note, that we do our configuration in ``config_test.yml``. It's convenient
+    way to configure MinkBundle, because ``test`` environment has all the
+    needed requirements for Mink and default ``SymfonyDriver`` enabled out
+    of the box.
+
+Configuring MinkBundle
+----------------------
+
+MinkBundle provides bunch of useful options for you to configure Mink's
+behavior. You can use them to make your testing experience even more
+smooth:
+
+* ``base_url`` - most important one. Defines base url for your application.
+  Used heavily inside BehatBundle and can be used inside your test cases to
+  be able to use relative paths in your web test cases.
+
+* ``default_session`` - defines session name, which will be used by default. It's
+  ``symfony`` out of the box.
+
+* ``javascript_session`` - defines session name, which will be used for ``@javascript``
+  tagged Behat scenarios.
+
+* ``browser_name`` - specifies browser to be used with ``sahi`` session.
+
+* ``show_cmd`` - specified console command to run on "show" step in BehatBundle.
+  For Mac OS, it could be something like ``open %s``.
+
 Writing your first test
 -----------------------
 
@@ -190,8 +219,6 @@ provided with it as a base class for your tests:
 
         protected function setUp()
         {
-            parent::setUp();
-
             $this->base = $this->getKernel()
                 ->getContainer()
                 ->getParameter('behat.mink.base_url');
@@ -213,18 +240,26 @@ Base ``Behat\MinkBundle\Test\MinkTestCase`` class provides an easy way to get
      $session = $this->getSession('symfony');
 
 2. If you want to test your application with **real** HTTP requests, you should
-   use ``goutte`` session:
+   use ``goutte`` session instead (should be enabled in ``config_test.yml``
+   first):
 
    .. code-block:: php
 
      $session = $this->getSession('goutte');
 
-3. Or if you want to test your app running in real browser - use ``sahi``
-   session:
+3. If you want to test your app running in real browser - use ``sahi``
+   session (should be enabled in ``config_test.yml`` first):
 
    .. code-block:: php
 
      $session = $this->getSession('sahi');
+
+3. If you want to test your app running in zombie.js browser - use ``zombie``
+   session (should be enabled in ``config_test.yml`` first):
+
+   .. code-block:: php
+
+     $session = $this->getSession('zombie');
 
 After you've choosen needed session - use it to perform actions on your
 Symfony2 app:
@@ -239,7 +274,7 @@ Symfony2 app:
 
     $session->getPage()->clickLink('p10');
 
-For example, spec form test with ``symfony`` session will look like that:
+For example, form specification with ``symfony`` session will look like that:
 
 .. code-block:: php
 
