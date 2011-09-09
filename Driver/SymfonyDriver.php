@@ -31,7 +31,7 @@ class SymfonyDriver extends GoutteDriver
     {
         // create new kernel, that could be easily rebooted
         $class  = get_class($client->getKernel());
-        $kernel = new $class('test', true);
+        $kernel = new $class($client->getKernel()->getEnvironment(), $client->getKernel()->isDebug());
         $kernel->boot();
 
         parent::__construct($kernel->getContainer()->get('test.client'));
