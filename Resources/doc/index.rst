@@ -19,21 +19,23 @@ The simplest way to install Mink is through PEAR:
     $ pear channel-discover pear.behat.org
     $ pear install behat/mink
 
-Now you should include Mink's autoloader into your ``app/autoload.php``:
+Now you should include Mink's autoloader in your ``AppKernel::registerBundles()``
+method (for ``test`` environment only):
 
 .. code-block:: php
 
-    <?php
+    <?php # app/AppKernel.php
     
     //...
-    
-    // remove Symfony2 classes from Mink autoload
-    // routine, cuz Symfony2 already autoloads them
-    // by itself
-    define('BEHAT_AUTOLOAD_ZF2', false);
 
-    // require autoloader
-    require_once 'mink/autoload.php';
+    if ('test' === $this->getEnvironment()) {
+        // don't autoload Symfony2 classes, as they are
+        // already loaded by the Symfony2 itself
+        if (!defined('BEHAT_AUTOLOAD_SF2')) define('BEHAT_AUTOLOAD_SF2', false);
+        require_once 'mink/autoload.php';
+    }
+
+    //...
 
 Method #2 (Git)
 ~~~~~~~~~~~~~~~
