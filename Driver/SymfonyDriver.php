@@ -104,6 +104,28 @@ class SymfonyDriver extends GoutteDriver
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getResponseHeaders()
+    {
+        $headers         = array();
+        $responseHeaders = trim($this->getClient()->getResponse()->headers->__toString());
+
+        foreach (explode("\r\n", $responseHeaders) as $header) {
+            list($name, $value) = array_map('trim', explode(':', $header));
+
+            if (isset($headers[$name])) {
+                $headers[$name]   = array($headers[$name]);
+                $headers[$name][] = $value;
+            } else {
+                $headers[$name] = $value;
+            }
+        }
+
+        return $headers;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getStatusCode()
