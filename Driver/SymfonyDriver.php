@@ -44,7 +44,7 @@ class SymfonyDriver extends GoutteDriver
      */
     public function visit($url)
     {
-        $url = preg_replace('/^https?\:\/\/[^\/]+(.+\.php)?/', '', $url);
+        $url = preg_replace('/^(https?\:\/\/[^\/]+)(.+\.php)?/', '$1', $url);
         parent::visit($url);
     }
 
