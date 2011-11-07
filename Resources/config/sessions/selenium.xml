@@ -9,7 +9,7 @@
 
         <parameter key="behat.mink.selenium.host">127.0.0.1</parameter>
         <parameter key="behat.mink.selenium.port">4444</parameter>
-        <parameter key="behat.mink.selenium.browser_name">*%behat.mink.browser_name%</parameter>
+        <parameter key="behat.mink.selenium.browser">*%behat.mink.browser_name%</parameter>
 
     </parameters>
     <services>
@@ -17,7 +17,7 @@
         <service id="behat.mink.session.selenium" class="%behat.mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%behat.mink.driver.selenium.class%" scope="prototype">
-                    <argument>%behat.mink.selenium.browser_name%</argument>
+                    <argument>%behat.mink.selenium.browser%</argument>
                     <argument>%behat.mink.base_url%</argument>
                     <argument type="service" id="behat.mink.selenium" />
                 </service>

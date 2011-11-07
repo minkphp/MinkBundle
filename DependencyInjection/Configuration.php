@@ -99,7 +99,7 @@ class Configuration implements ConfigurationInterface
                         scalarNode('port')->
                             defaultValue(4444)->
                         end()->
-                        scalarNode('browser_name')->
+                        scalarNode('browser')->
                             defaultValue('*%behat.mink.browser_name%')->
                         end()->
                     end()->
