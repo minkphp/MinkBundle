@@ -91,6 +91,19 @@ class Configuration implements ConfigurationInterface
                         end()->
                     end()->
                 end()->
+                arrayNode('selenium')->
+                    children()->
+                        scalarNode('host')->
+                            defaultValue('127.0.0.1')->
+                        end()->
+                        scalarNode('port')->
+                            defaultValue(4444)->
+                        end()->
+                        scalarNode('browser_name')->
+                            defaultValue('*%behat.mink.browser_name%')->
+                        end()->
+                    end()->
+                end()->
             end()->
         end();
     }

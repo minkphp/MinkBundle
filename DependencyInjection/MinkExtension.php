@@ -48,6 +48,9 @@ class MinkExtension extends Extension
         if (isset($config['zombie'])) {
             $loader->load('sessions/zombie.xml');
         }
+        if (isset($config['selenium'])) {
+            $loader->load('sessions/selenium.xml');
+        }
 
         foreach ($config as $ns => $tlValue) {
             if (!is_array($tlValue)) {
