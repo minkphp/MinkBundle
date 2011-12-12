@@ -112,7 +112,7 @@ class SymfonyDriver extends GoutteDriver
         $responseHeaders = trim($this->getClient()->getResponse()->headers->__toString());
 
         foreach (explode("\r\n", $responseHeaders) as $header) {
-            list($name, $value) = array_map('trim', explode(':', $header));
+            list($name, $value) = array_map('trim', explode(':', $header, 2));
 
             if (isset($headers[$name])) {
                 $headers[$name]   = array($headers[$name]);
