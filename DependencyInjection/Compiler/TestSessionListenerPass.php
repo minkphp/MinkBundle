@@ -23,9 +23,7 @@ class TestSessionListenerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if ('test' === $container->getParameterBag()->get('kernel.environment')) {
-            $sessionListenerClass = $container->getParameter('session_listener.class');
-            $container->setParameter('test.session.listener.class', $sessionListenerClass);
-        }
+        $sessionListenerClass = $container->getParameter('session_listener.class');
+        $container->setParameter('test.session.listener.class', $sessionListenerClass);
     }
 }

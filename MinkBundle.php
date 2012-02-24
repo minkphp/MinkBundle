@@ -36,6 +36,8 @@ class MinkBundle extends Bundle
 
         $container->addCompilerPass(new SessionsPass());
         $container->addCompilerPass(new SelectorsHandlerPass());
-        $container->addCompilerPass(new TestSessionListenerPass());
+        if ('test' === $container->getParameterBag()->get('kernel.environment')) {
+            $container->addCompilerPass(new TestSessionListenerPass());
+        }
     }
 }
