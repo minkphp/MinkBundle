@@ -51,6 +51,9 @@ class MinkExtension extends Extension
         if (isset($config['selenium'])) {
             $loader->load('sessions/selenium.xml');
         }
+        if (isset($config['selenium2'])) {
+            $loader->load('sessions/selenium2.xml');
+        }
 
         foreach ($config as $ns => $tlValue) {
             if (!is_array($tlValue)) {

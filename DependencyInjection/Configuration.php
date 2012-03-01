@@ -104,6 +104,35 @@ class Configuration implements ConfigurationInterface
                         end()->
                     end()->
                 end()->
+                arrayNode('selenium2')->
+                    children()->
+                        scalarNode('browser')->
+                            defaultValue('%behat.mink.browser_name%')->
+                        end()->
+                        arrayNode('capabilities')->
+                            children()->
+                                scalarNode('browserName')->
+                                    defaultValue('firefox')->
+                                end()->
+                                scalarNode('version')->
+                                    defaultValue(8)->
+                                end()->
+                                scalarNode('platform')->
+                                    defaultValue('ANY')->
+                                end()->
+                                scalarNode('browserVersion')->
+                                    defaultValue(8)->
+                                end()->
+                                scalarNode('browser')->
+                                    defaultValue('firefox')->
+                                end()->
+                            end()->
+                        end()->
+                        scalarNode('wd_host')->
+                            defaultValue('http://localhost:4444/wd/hub')->
+                        end()->
+                    end()->
+                end()->
             end()->
         end();
     }
