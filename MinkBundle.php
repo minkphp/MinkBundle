@@ -6,7 +6,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Behat\MinkBundle\DependencyInjection\Compiler\SessionsPass,
-    Behat\MinkBundle\DependencyInjection\Compiler\SelectorsHandlerPass;
+    Behat\MinkBundle\DependencyInjection\Compiler\SelectorsHandlerPass,
+    Behat\MinkBundle\DependencyInjection\Compiler\TestSessionListenerPass;
 
 /*
  * This file is part of the Behat\MinkBundle
