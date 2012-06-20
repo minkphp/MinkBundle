@@ -5,8 +5,7 @@ namespace Behat\MinkBundle\Test;
 use Symfony\Component\Finder\Finder,
     Symfony\Component\HttpKernel\HttpKernelInterface;
 
-use Behat\Mink\Mink,
-    Behat\Mink\PHPUnit\TestCase as BaseMinkTestCase;
+use Behat\Mink\Mink;
 
 /*
  * This file is part of the Behat\MinkBundle
@@ -22,7 +21,7 @@ use Behat\Mink\Mink,
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
-abstract class MinkTestCase extends BaseMinkTestCase
+abstract class MinkTestCase extends \PHPUnit_Framework_TestCase
 {
     private static $kernelClass;
     private static $kernel;
