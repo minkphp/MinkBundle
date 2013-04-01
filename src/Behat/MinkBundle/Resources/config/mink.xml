@@ -7,7 +7,7 @@
         <parameter key="mink.paths.lib">null</parameter>
         <parameter key="behat.mink.class">Behat\Mink\Mink</parameter>
         <parameter key="behat.mink.session.class">Behat\Mink\Session</parameter>
-        <parameter key="behat.mink.driver.symfony.class">Behat\MinkBundle\Driver\SymfonyDriver</parameter>
+        <parameter key="behat.mink.driver.symfony.class">Behat\Mink\Driver\BrowserKitDriver</parameter>
         <parameter key="behat.mink.selectors_handler.class">Behat\Mink\Selector\SelectorsHandler</parameter>
         <parameter key="behat.test_client.class">Behat\MinkBundle\Client</parameter>
 

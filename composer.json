@@ -3,9 +3,12 @@
     "type": "symfony-bundle",
     "description": "Mink bundle for Symfony2",
     "keywords": ["web", "test", "browser"],
-    "homepage": "http://mink.behat.org/bundle/index.html",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Ton Sharp",
+            "email": "66ton99@gmail.com"
+        },
         {
             "name": "Konstantin Kudryashov",
             "email": "ever.zet@gmail.com"
@@ -18,15 +21,14 @@
         "symfony/framework-bundle":  "2.2.*"
     },
 
-    "autoload": {
-        "psr-0": { "Behat\\MinkBundle": "" }
+    "require-dev": {
+        "behat/mink-browserkit-driver": "1.0.*",
+        "behat/mink-goutte-driver":     "1.0.*",
+        "behat/mink-selenium2-driver":  "1.0.*",
+        "behat/mink-zombie-driver":     "1.0.*"
     },
 
-    "target-dir": "Behat/MinkBundle",
-
-    "repositories": {
-        "behat/mink-deps": {
-            "composer": { "url": "behat.org" }
-        }
+    "autoload": {
+        "psr-0": { "Behat\\MinkBundle": "src/" }
     }
 }

@@ -22,8 +22,7 @@
             <tag name="behat.mink.session" alias="goutte" />
         </service>
 
-        <service id="behat.mink.goutte" class="%behat.mink.goutte.class%"
-            scope="prototype">
+        <service id="behat.mink.goutte" class="%behat.mink.goutte.class%" scope="prototype">
             <argument>%behat.mink.goutte.zend_config%</argument>
             <argument>%behat.mink.goutte.server_parameters%</argument>
         </service>
