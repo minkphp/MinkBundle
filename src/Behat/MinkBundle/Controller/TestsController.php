@@ -1,6 +1,6 @@
 <?php
 
-namespace Behat\MinkBundle\Tests\Controller;
+namespace Behat\MinkBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Symfony\Component\HttpFoundation\RedirectResponse;

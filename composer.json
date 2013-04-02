@@ -16,9 +16,9 @@
     ],
 
     "require": {
-        "php":                       ">=5.3.3",
-        "behat/mink":                "1.4.*",
-        "symfony/framework-bundle":  "2.2.*"
+        "php":              ">=5.3.3",
+        "behat/mink":       "1.4.*",
+        "symfony/symfony":  "2.2.*"
     },
 
     "require-dev": {
@@ -29,6 +29,9 @@
     },
 
     "autoload": {
-        "psr-0": { "Behat\\MinkBundle": "src/" }
+        "psr-0": {
+            "Behat\\MinkBundle": "src/",
+            "Behat\\MinkBundle\\Tests": "tests/"
+        }
     }
 }
