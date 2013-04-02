@@ -50,17 +50,8 @@ class Configuration implements ConfigurationInterface
                 scalarNode('browser_name')->
                     defaultValue('firefox')->
                 end()->
-                arrayNode('goutte')->
-                    children()->
-                        arrayNode('zend_config')->
-                            useAttributeAsKey('key')->
-                            prototype('variable')->end()->
-                        end()->
-                        arrayNode('server_parameters')->
-                            useAttributeAsKey('key')->
-                            prototype('variable')->end()->
-                        end()->
-                    end()->
+                booleanNode('goutte')->
+                    defaultFalse()->
                 end()->
                 arrayNode('sahi')->
                     children()->
@@ -83,8 +74,8 @@ class Configuration implements ConfigurationInterface
                         scalarNode('port')->
                             defaultValue(8124)->
                         end()->
-                        scalarNode('auto_server')->
-                            defaultValue(true)->
+                        booleanNode('auto_server')->
+                            defaultTrue()->
                         end()->
                         scalarNode('node_bin')->
                             defaultValue('node')->
@@ -93,21 +84,21 @@ class Configuration implements ConfigurationInterface
                 end()->
                 arrayNode('selenium')->
                     children()->
+                        scalarNode('browser')->
+                            defaultValue('*firefox')->
+                        end()->
                         scalarNode('host')->
                             defaultValue('127.0.0.1')->
                         end()->
                         scalarNode('port')->
                             defaultValue(4444)->
                         end()->
-                        scalarNode('browser')->
-                            defaultValue('*%behat.mink.browser_name%')->
-                        end()->
                     end()->
                 end()->
                 arrayNode('selenium2')->
                     children()->
                         scalarNode('browser')->
-                            defaultValue('%behat.mink.browser_name%')->
+                            defaultValue('firefox')->
                         end()->
                         arrayNode('capabilities')->
                             children()->
