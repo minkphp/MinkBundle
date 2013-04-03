@@ -50,8 +50,8 @@ class Configuration implements ConfigurationInterface
                 scalarNode('browser_name')->
                     defaultValue('firefox')->
                 end()->
-                booleanNode('goutte')->
-                    defaultFalse()->
+                arrayNode('goutte')->
+                    treatTrueLike(array('enabled' => true))->
                 end()->
                 arrayNode('sahi')->
                     children()->
@@ -85,7 +85,7 @@ class Configuration implements ConfigurationInterface
                 arrayNode('selenium')->
                     children()->
                         scalarNode('browser')->
-                            defaultValue('*firefox')->
+                            defaultValue('*%mink.browser_name%')->
                         end()->
                         scalarNode('host')->
                             defaultValue('127.0.0.1')->
@@ -98,24 +98,13 @@ class Configuration implements ConfigurationInterface
                 arrayNode('selenium2')->
                     children()->
                         scalarNode('browser')->
-                            defaultValue('firefox')->
+                            defaultValue('%mink.browser_name%')->
                         end()->
                         arrayNode('capabilities')->
+                            addDefaultsIfNotSet()->
                             children()->
                                 scalarNode('browserName')->
-                                    defaultValue('firefox')->
-                                end()->
-                                scalarNode('version')->
-                                    defaultValue(8)->
-                                end()->
-                                scalarNode('platform')->
-                                    defaultValue('ANY')->
-                                end()->
-                                scalarNode('browserVersion')->
-                                    defaultValue(8)->
-                                end()->
-                                scalarNode('browser')->
-                                    defaultValue('firefox')->
+                                    defaultValue('%mink.browser_name%')->
                                 end()->
                             end()->
                         end()->

@@ -34,7 +34,7 @@ class SessionsPass implements CompilerPassInterface
         }
         $minkDefinition = $container->getDefinition('behat.mink');
 
-        foreach ($container->findTaggedServiceIds('behat.mink.session') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('mink.session') as $id => $attributes) {
             foreach ($attributes as $attribute) {
                 if (isset($attribute['alias']) && $name = $attribute['alias']) {
                     $minkDefinition->addMethodCall(
@@ -45,7 +45,7 @@ class SessionsPass implements CompilerPassInterface
         }
 
         $minkDefinition->addMethodCall(
-            'setDefaultSessionName', array($container->getParameter('behat.mink.default_session'))
+            'setDefaultSessionName', array($container->getParameter('mink.default_session'))
         );
     }
 }

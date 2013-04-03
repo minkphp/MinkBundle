@@ -15,6 +15,9 @@ class SymfonySessionTest extends BaseSessionTestCase
 
         $session->setRequestHeader('Accept-Language', 'fr');
         $session->visit($this->base . '/_behat/tests/headers');
+
+        echo($session->getPage()->getContent());die("OK\n");
+
         $this->assertContains("'accept-language' =>", $session->getPage()->getContent());
         $this->assertContains("'fr'", $session->getPage()->getContent());
 

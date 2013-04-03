@@ -13,7 +13,7 @@ abstract class BaseSessionTestCase extends MinkTestCase
     protected function setUp()
     {
         $this->getMink()->setDefaultSessionName(static::getSessionName());
-        $this->base = static::getContainer()->getParameter('behat.mink.base_url');
+        $this->base = static::getContainer()->getParameter('mink.base_url');
     }
 
     public function testSimpleBrowsing()

@@ -4,31 +4,31 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
 
-        <parameter key="behat.mink.driver.selenium.class">Behat\Mink\Driver\SeleniumDriver</parameter>
-        <parameter key="behat.mink.selenium.class">Selenium\Client</parameter>
+        <parameter key="mink.driver.selenium.class">Behat\Mink\Driver\SeleniumDriver</parameter>
+        <parameter key="mink.selenium.class">Selenium\Client</parameter>
 
-        <parameter key="behat.mink.selenium.host">127.0.0.1</parameter>
-        <parameter key="behat.mink.selenium.port">4444</parameter>
-        <parameter key="behat.mink.selenium.browser">*%behat.mink.browser_name%</parameter>
+        <parameter key="mink.selenium.host">127.0.0.1</parameter>
+        <parameter key="mink.selenium.port">4444</parameter>
+        <parameter key="mink.selenium.browser">*%mink.browser_name%</parameter>
 
     </parameters>
     <services>
 
-        <service id="behat.mink.session.selenium" class="%behat.mink.session.class%" scope="prototype">
+        <service id="mink.session.selenium" class="%mink.session.class%" scope="prototype">
             <argument type="service">
-                <service class="%behat.mink.driver.selenium.class%" scope="prototype">
-                    <argument>%behat.mink.selenium.browser%</argument>
-                    <argument>%behat.mink.base_url%</argument>
-                    <argument type="service" id="behat.mink.selenium" />
+                <service class="%mink.driver.selenium.class%" scope="prototype">
+                    <argument>%mink.selenium.browser%</argument>
+                    <argument>%mink.base_url%</argument>
+                    <argument type="service" id="mink.selenium" />
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
-            <tag name="behat.mink.session" alias="selenium" />
+            <argument type="service" id="mink.selectors_handler" />
+            <tag name="mink.session" alias="selenium" />
         </service>
 
-        <service id="behat.mink.selenium" class="%behat.mink.selenium.class%" scope="prototype">
-            <argument>%behat.mink.selenium.host%</argument>
-            <argument>%behat.mink.selenium.port%</argument>
+        <service id="mink.selenium" class="%mink.selenium.class%" scope="prototype">
+            <argument>%mink.selenium.host%</argument>
+            <argument>%mink.selenium.port%</argument>
         </service>
 
     </services>
