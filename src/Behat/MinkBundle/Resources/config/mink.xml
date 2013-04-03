@@ -10,7 +10,7 @@
         <parameter key="mink.driver.symfony.class">Behat\Mink\Driver\BrowserKitDriver</parameter>
         <parameter key="mink.selectors_handler.class">Behat\Mink\Selector\SelectorsHandler</parameter>
         <parameter key="mink.default_session">symfony</parameter>
-        <parameter key="mink.javascript_session">sahi</parameter>
+        <parameter key="mink.javascript_session">zombie</parameter>
         <parameter key="mink.base_url">null</parameter>
         <parameter key="mink.show_cmd">null</parameter>
         <parameter key="mink.show_tmp_dir">%kernel.cache_dir%</parameter>

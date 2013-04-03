@@ -16,13 +16,13 @@
     ],
 
     "require": {
-        "php":              ">=5.3.3",
-        "behat/mink":       "1.4.*",
-        "symfony/symfony":  "2.2.*"
+        "php":                          ">=5.3.3",
+        "behat/mink":                   "1.4.*",
+        "symfony/framework-bundle":     "2.2.*",
+        "behat/mink-browserkit-driver": "1.0.*"
     },
 
     "suggest": {
-        "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
         "behat/mink-goutte-driver":     "fast headless driver for any app without JS emulation",
         "behat/mink-zombie-driver":     "fast and JS-enabled headless driver for any app (requires node.js)",
         "behat/mink-sahi-driver":       "slow, but JS-enabled driver for any app (requires Sahi)",
