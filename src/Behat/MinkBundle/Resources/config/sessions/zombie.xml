@@ -5,12 +5,10 @@
     <parameters>
 
         <parameter key="mink.driver.zombie.class">Behat\Mink\Driver\ZombieDriver</parameter>
-        <parameter key="mink.zombie.connection.class">Behat\Mink\Driver\Zombie\Connection</parameter>
-        <parameter key="mink.zombie.server.class">Behat\Mink\Driver\Zombie\Server</parameter>
+        <parameter key="mink.zombie.server.class">Behat\Mink\Driver\NodeJS\Server\ZombieServer</parameter>
 
         <parameter key="mink.zombie.host">127.0.0.1</parameter>
         <parameter key="mink.zombie.port">8124</parameter>
-        <parameter key="mink.zombie.auto_server">true</parameter>
         <parameter key="mink.zombie.node_bin">node</parameter>
 
     </parameters>
@@ -19,18 +17,11 @@
         <service id="mink.session.zombie" class="%mink.session.class%" scope="prototype">
             <argument type="service">
                 <service class="%mink.driver.zombie.class%" scope="prototype">
-                    <argument type="service" id="mink.zombie.connection" />
                     <argument type="service" id="mink.zombie.server" />
-                    <argument>%mink.zombie.auto_server%</argument>
                 </service>
             </argument>
             <argument type="service" id="mink.selectors_handler" />
             <tag name="mink.session" alias="zombie" />
-        </service>
-
-        <service id="mink.zombie.connection" class="%mink.zombie.connection.class%" scope="prototype">
-            <argument>%mink.zombie.host%</argument>
-            <argument>%mink.zombie.port%</argument>
         </service>
 
         <service id="mink.zombie.server" class="%mink.zombie.server.class%" scope="prototype">
