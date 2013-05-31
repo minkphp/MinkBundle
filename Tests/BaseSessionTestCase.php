@@ -1,5 +1,4 @@
 <?php
-
 namespace Behat\MinkBundle\Tests;
 
 use Behat\MinkBundle\Test\MinkTestCase;
