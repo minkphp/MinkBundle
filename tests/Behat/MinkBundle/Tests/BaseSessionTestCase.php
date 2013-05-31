@@ -32,6 +32,11 @@ abstract class BaseSessionTestCase extends MinkTestCase
         $session->getPage()->clickLink('p10');
         $this->assertTrue($session->getPage()->hasContent('Page N10'));
 
+        $session->getPage()->clickLink('p22');
+
+        $this->assertNotNull($environment = $session->getPage()->find('css', '#environment'));
+        $this->assertEquals('test', $environment->getText());
+
         try {
             $session->getPage()->clickLink('p100');
             $this->fail('Unexisting link should throw exception onClick');

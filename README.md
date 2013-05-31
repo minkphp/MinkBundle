@@ -2,7 +2,7 @@ Provides Behat\Mink browser abstraction library for PHPUnit in Symfony2 project.
 
 ## Features
 
-- Symfony2 test.client browser emulator - In progress
+- Symfony2 test.client browser emulator - Works
 - Goutte browser emulator - Works
 - Zombie (JS testing) browser emulator - To be done
 - Selenium2 (WebDriver) browser emulator - Works

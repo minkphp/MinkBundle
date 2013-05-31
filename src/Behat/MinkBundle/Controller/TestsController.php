@@ -23,7 +23,9 @@ class TestsController extends Controller
     public function pageAction($page)
     {
         return $this->render('MinkBundle::page.html.twig', array(
-            'page' => preg_replace('/page(\d+)/', 'Page N\\1', $page)
+            'page' => preg_replace('/page(\d+)/', 'Page N\\1', $page),
+            'environment' => $this->get('kernel')->getEnvironment(),
+            'genUrl' => $this->get('router')->generate('_behat_tests_page', array('page' => 'page0'), true),
         ));
     }
 

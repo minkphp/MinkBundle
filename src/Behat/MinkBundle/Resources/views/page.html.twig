@@ -5,8 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 <body>
-    {{ page }}
 
+    {{ page }}
+    <div id="environment">{{ environment }}</div>
     <ul>
         <li>
             <a href="{{ path('_behat_tests_page', {'page': 'page10'}) }}">p10</a>
@@ -15,7 +16,7 @@
             <a href="{{ path('_behat_tests_page', {'page': 'page0'}) }}">p0</a>
         </li>
         <li>
-            <a href="{{ path('_behat_tests_page', {'page': 'page22'}) }}">p22</a>
+            <a href="{{ genUrl }}">p22</a>
         </li>
     </ul>
 </body>
