@@ -47,7 +47,7 @@ _mink_bundle:
 And run tests from the root of the project
 
 ```bash
-phpunit vendor/behat/mink-bundle/tests/Behat/MinkBundle/Tests/
+phpunit vendor/behat/mink-bundle/Behat/MinkBundle/Tests/*
 ```
 
 ## Documentation
