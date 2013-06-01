@@ -38,36 +38,62 @@ class MinkExtension extends Extension
 
         $loader = $this->getFileLoader($container);
         $loader->load('mink.xml');
-
         if (isset($config['goutte'])) {
+            if (false == class_exists('Behat\Mink\Driver\GoutteDriver')) {
+                throw new \RuntimeException(
+                    'Cannot find "GoutteDriver". Have you installed behat/mink-goutte-driver package?'
+                );
+            }
             $loader->load('sessions/goutte.xml');
         }
         if (isset($config['sahi'])) {
+            if (false == class_exists('Behat\Mink\Driver\SahiDriver')) {
+                throw new \RuntimeException(
+                    'Cannot find "SahiDriver". Have you installed behat/mink-sahi-driver package?'
+                );
+            }
             $loader->load('sessions/sahi.xml');
         }
         if (isset($config['zombie'])) {
+            if (false == class_exists('Behat\Mink\Driver\ZombieDriver')) {
+                throw new \RuntimeException(
+                    'Cannot find "ZombieDriver". Have you installed behat/mink-zombie-driver package?'
+                );
+            }
             $loader->load('sessions/zombie.xml');
         }
         if (isset($config['selenium'])) {
+            if (false == class_exists('Behat\Mink\Driver\SeleniumDriver')) {
+                throw new \RuntimeException(
+                    'Cannot find "SeleniumDriver". Have you installed behat/mink-selenium-driver package?'
+                );
+            }
             $loader->load('sessions/selenium.xml');
         }
         if (isset($config['selenium2'])) {
+            if (false == class_exists('Behat\Mink\Driver\Selenium2Driver')) {
+                throw new \RuntimeException(
+                    'Cannot find "Selenium2Driver". Have you installed behat/mink-selenium-driver package?'
+                );
+            }
             $loader->load('sessions/selenium2.xml');
         }
 
         foreach ($config as $ns => $tlValue) {
             if (!is_array($tlValue)) {
-                $container->setParameter("behat.mink.$ns", $tlValue);
+                $container->setParameter("mink.$ns", $tlValue);
             } else {
                 foreach ($tlValue as $name => $value) {
-                    $container->setParameter("behat.mink.$ns.$name", $value);
+                    $container->setParameter("mink.$ns.$name", $value);
                 }
             }
         }
 
-        $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
-        $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
-        $container->setParameter('mink.paths.lib', $minkLibPath);
+        if (!$container->hasParameter('mink.paths.lib')) {
+            $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
+            $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
+            $container->setParameter('mink.paths.lib', $minkLibPath);
+        }
     }
 
     /**

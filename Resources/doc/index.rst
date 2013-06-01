@@ -7,128 +7,60 @@ write functional tests for Symfony2 applications.
 Mink Installation
 -----------------
 
-In order to be able to use MinkBundle, you need to install Mink first.
-
-Method #1 (PEAR)
-~~~~~~~~~~~~~~~~
-
-The simplest way to install Mink is through PEAR:
-
-.. code-block:: bash
-
-    $ pear channel-discover pear.behat.org
-    $ pear install behat/mink
-
-Now you should include Mink's autoloader in your ``AppKernel::registerBundles()``
-method (for ``test`` environment only):
-
-.. code-block:: php
-
-    <?php # app/AppKernel.php
-    
-    //...
-
-    if ('test' === $this->getEnvironment()) {
-        // don't autoload Symfony2 classes, as they are
-        // already loaded by the Symfony2 itself
-        if (!defined('BEHAT_AUTOLOAD_SF2')) define('BEHAT_AUTOLOAD_SF2', false);
-        require_once 'mink/autoload.php';
-    }
-
-    //...
-
-Method #2 (Git)
+Composer
 ~~~~~~~~~~~~~~~
 
-Add next lines to your ``deps`` file:
+Add next lines to your ``composer.json`` file:
 
-.. code-block:: ini
+.. code-block:: json
 
-    [mink]
-        git=https://github.com/Behat/Mink.git
-        target=/behat/mink
+    "require-dev": {
+        ...
+        "behat/mink-bundle": "dev-master"
+    }
 
 By default, ``MinkBundle`` will use custom ``SymfonyDriver``. But if you want
 to use ``GoutteDriver``, you'll need to also add:
 
-.. code-block:: ini
+.. code-block:: json
 
-    [goutte]
-        git=https://github.com/fabpot/Goutte.git
-        target=/goutte
-    [zend]
-        git=https://github.com/zendframework/zf2.git
-        target=/zend
+    "require-dev": {
+        ...
+        "behat/mink-bundle": "dev-master",
+        "behat/mink-goutte-driver": "1.0.*"
+    }
 
-And if you want to use ``SahiDriver``, you'll need to add another 2 lines:
+And if you want to use ``SahiDriver``, you'll need to add another line:
 
-.. code-block:: ini
+.. code-block:: json
 
-    [buzz]
-        git=https://github.com/kriswallsmith/Buzz.git
-        target=/buzz
-    [SahiClient]
-        git=https://github.com/Behat/SahiClient
-        target=/behat/sahi
+    "require-dev": {
+        ...
+        "behat/mink-bundle": "dev-master",
+        "behat/mink-sahi-driver": "1.0.*"
+    }
 
 Now run:
 
 .. code-block:: bash
 
-    bin/vendors install
+    composer.phar install --dev
 
-in order to install all missing parts.
+in order to install all parts.
 
-It's time to setup your ``app/autoload.php``:
-
-.. code-block:: php
-
-    $loader->registerNamespaces(array(
-    //...
-        'Behat\Mink'       => __DIR__.'/../vendor/behat/mink/src',
-
-        // if you want to use GoutteDriver
-        'Goutte'           => __DIR__.'/../vendor/goutte/src',
-        'Zend'             => __DIR__.'/../vendor/zend/library',
-
-        // if you want to use SahiDriver
-        'Behat\SahiClient' => __DIR__.'/../vendor/behat/sahi/src',
-        'Buzz'             => __DIR__.'/../vendor/buzz/lib',
-    //...
-    ));
 
 Bundle Installation & Setup
 ---------------------------
 
 Now it's time to install and setup ``MinkBundle`` itself.
 
-1. Add ``MinkBundle`` repository address to your ``deps`` file:
-
-    .. code-block:: ini
-
-        [MinkBundle]
-            git=https://github.com/Behat/MinkBundle.git
-            target=/bundles/Behat/MinkBundle
-
-2. Add  it to ``app/autoload.php``:
-
-    .. code-block:: php
-
-        $loader->registerNamespaces(array(
-        //...
-            'Behat\MinkBundle' => __DIR__.'/../vendor/bundles',
-        //...
-        ));
-
-3. And to ``app/AppKernel.php``:
+And to ``app/AppKernel.php``:
 
     .. code-block:: php
 
         if ('test' === $this->getEnvironment()) {
             $bundles[] = new Behat\MinkBundle\MinkBundle();
         }
-
-4. Run ``bin/vendors install``
 
 Bundle Configuration
 ~~~~~~~~~~~~~~~~~~~~
@@ -223,7 +155,7 @@ provided with it as a base class for your tests:
         {
             $this->base = $this->getKernel()
                 ->getContainer()
-                ->getParameter('behat.mink.base_url');
+                ->getParameter('mink.base_url');
         }
 
         // write functional tests

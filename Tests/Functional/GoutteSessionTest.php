@@ -1,12 +1,13 @@
 <?php
+namespace Behat\MinkBundle\Tests\Functional;
 
-namespace Behat\MinkBundle\Tests;
+use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
-class SymfonySessionTest extends BaseSessionTestCase
+class GoutteSessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
     {
-        return 'symfony';
+        return 'goutte';
     }
 
     public function testHeaders()

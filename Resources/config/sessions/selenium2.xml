@@ -4,31 +4,27 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
 
-        <parameter key="behat.mink.driver.selenium2.class">Behat\Mink\Driver\Selenium2Driver</parameter>
+        <parameter key="mink.driver.selenium2.class">Behat\Mink\Driver\Selenium2Driver</parameter>
 
-        <parameter key="behat.mink.selenium2.browser">%behat.mink.browser_name%</parameter>
-        <parameter key="behat.mink.selenium2.capabilities">
+        <parameter key="mink.selenium2.browser">%mink.browser_name%</parameter>
+        <parameter key="mink.selenium2.capabilities" type="collection">
             <parameter key="browserName">firefox</parameter>
-            <parameter key="version">8</parameter>
-            <parameter key="platform">ANY</parameter>
-            <parameter key="browserVersion">8</parameter>
-            <parameter key="browser">firefox</parameter>
         </parameter>
-        <parameter key="behat.mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
+        <parameter key="mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
 
     </parameters>
     <services>
 
-        <service id="behat.mink.session.selenium2" class="%behat.mink.session.class%" scope="prototype">
+        <service id="mink.session.selenium2" class="%mink.session.class%" scope="prototype">
             <argument type="service">
-                <service class="%behat.mink.driver.selenium2.class%" scope="prototype">
-                    <argument type="string">%behat.mink.selenium2.browser%</argument>
-                    <argument type="collection">%behat.mink.selenium2.capabilities%</argument>
-                    <argument type="string">%behat.mink.selenium2.wd_host%</argument>
+                <service class="%mink.driver.selenium2.class%" scope="prototype">
+                    <argument type="string">%mink.selenium2.browser%</argument>
+                    <argument>%mink.selenium2.capabilities%</argument>
+                    <argument type="string">%mink.selenium2.wd_host%</argument>
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
-            <tag name="behat.mink.session" alias="selenium2" />
+            <argument type="service" id="mink.selectors_handler" />
+            <tag name="mink.session" alias="selenium2" />
         </service>
 
     </services>
