@@ -125,13 +125,8 @@ smooth:
 * ``default_session`` - defines session name, which will be used by default. It's
   ``symfony`` out of the box.
 
-* ``javascript_session`` - defines session name, which will be used for ``@javascript``
-  tagged Behat scenarios.
+* ``browser_name`` - specifies browser to be used with ``Sahi``, ``Selenium`` or ``Selenium2`` sessions.
 
-* ``browser_name`` - specifies browser to be used with ``sahi`` session.
-
-* ``show_cmd`` - specified console command to run on "show" step in BehatBundle.
-  For Mac OS, it could be something like ``open %s``.
 
 Writing your first test
 -----------------------
@@ -169,9 +164,9 @@ Base ``Behat\MinkBundle\Test\MinkTestCase`` class provides an easy way to get
 
    .. code-block:: php
 
-     $session = $this->getSession();
+     $session = $this->getMink()->getSession();
      // or you can use the more verbose call:
-     $session = $this->getSession('symfony');
+     $session = $this->getMink()->getSession('symfony');
 
 2. If you want to test your application with **real** HTTP requests, you should
    use ``goutte`` session instead (should be enabled in ``config_test.yml``
@@ -179,21 +174,21 @@ Base ``Behat\MinkBundle\Test\MinkTestCase`` class provides an easy way to get
 
    .. code-block:: php
 
-     $session = $this->getSession('goutte');
+     $session = $this->getMink()->getSession('goutte');
 
 3. If you want to test your app running in real browser - use ``sahi``
    session (should be enabled in ``config_test.yml`` first):
 
    .. code-block:: php
 
-     $session = $this->getSession('sahi');
+     $session = $this->getMink()->getSession('sahi');
 
 3. If you want to test your app running in zombie.js browser - use ``zombie``
    session (should be enabled in ``config_test.yml`` first):
 
    .. code-block:: php
 
-     $session = $this->getSession('zombie');
+     $session = $this->getMink()->getSession('zombie');
 
 After you've choosen needed session - use it to perform actions on your
 Symfony2 app:
@@ -214,7 +209,7 @@ For example, form specification with ``symfony`` session will look like that:
 
     public function testForms()
     {
-        $session = $this->getSession();
+        $session = $this->getMink()->getSession();
 
         $session->visit($this->base.'/_behat/tests/form');
         $page = $session->getPage();
