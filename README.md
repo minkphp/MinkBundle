@@ -34,7 +34,7 @@ mink.browser_name: 'chrome'
 
 ## Documentation
 
-- [Installation](/Behat/MinkBundle/blob/master/Resources/doc/index.rst)
+- [Installation](/Resources/doc/index.rst)
 - [Mink Documentation](http://mink.behat.org)
 - [PHPUnit Documentation](http://www.phpunit.de/manual/current/en/index.html)
 
