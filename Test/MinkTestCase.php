@@ -54,7 +54,7 @@ abstract class MinkTestCase extends WebTestCase
     /**
      * @return \Symfony\Component\HttpKernel\Kernel
      */
-    public static function getKernel()
+    public function getKernel()
     {
         if (null === static::$kernel) {
             static::$kernel = static::createKernel();
@@ -68,8 +68,8 @@ abstract class MinkTestCase extends WebTestCase
     /**
      * @return \Symfony\Component\DependencyInjection\Container
      */
-    public static function getContainer()
+    public function getContainer()
     {
-        return static::getKernel()->getContainer();
+        return $this->getKernel()->getContainer();
     }
 }
