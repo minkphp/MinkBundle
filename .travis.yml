@@ -21,6 +21,8 @@ before_script:
   - sleep 4
 
   - npm install zombie@0.12.15
+  - export NODE_PATH="$(pwd)/node_modules"
+  - export PATH="/usr/local/share/npm/bin:$PATH"
 
   - curl http://getcomposer.org/installer | php
   - php composer.phar install --prefer-source --dev
