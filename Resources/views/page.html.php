@@ -5,17 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 <body>
-    {{ page }}
 
+    <?php echo $page;?>
+    <div id="environment"><?php echo $environment;?></div>
     <ul>
         <li>
-            <a href="{{ path('_behat_tests_page', {'page': 'page10'}) }}">p10</a>
+            <a href="<?php echo $view['router']->generate('_behat_tests_page', array('page' => 'page10'));?>">p10</a>
         </li>
         <li>
-            <a href="{{ path('_behat_tests_page', {'page': 'page0'}) }}">p0</a>
+            <a href="<?php echo $view['router']->generate('_behat_tests_page', array('page' => 'page0'));?>">p0</a>
         </li>
         <li>
-            <a href="{{ path('_behat_tests_page', {'page': 'page22'}) }}">p22</a>
+            <a href="<?php echo $genUrl;?>">p22</a>
         </li>
     </ul>
 </body>

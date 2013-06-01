@@ -29,12 +29,12 @@ class SelectorsHandlerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('behat.mink.selectors_handler')) {
+        if (!$container->hasDefinition('mink.selectors_handler')) {
             return;
         }
 
-        $handlerDefinition = $container->getDefinition('behat.mink.selectors_handler');
-        foreach ($container->findTaggedServiceIds('behat.mink.selector') as $id => $attributes) {
+        $handlerDefinition = $container->getDefinition('mink.selectors_handler');
+        foreach ($container->findTaggedServiceIds('mink.selector') as $id => $attributes) {
             foreach ($attributes as $attribute) {
                 if (isset($attribute['alias']) && $alias = $attribute['alias']) {
                     $handlerDefinition->addMethodCall(

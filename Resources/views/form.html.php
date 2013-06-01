@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 </head>
 <body>
-    <form name="user" method="post" action="{{ path('_behat_tests_submit') }}">
+    <form name="user" method="post" action="<?php echo $view['router']->generate('_behat_tests_submit');?>">
         <input id="name" type="text" name="name" />
         <input id="age" type="text" name="age" />
         <select id="speciality" name="speciality">
