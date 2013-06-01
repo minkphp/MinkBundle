@@ -1,12 +1,13 @@
 <?php
+namespace Behat\MinkBundle\Tests\Functional;
 
-namespace Behat\MinkBundle\Tests;
+use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
-class GoutteSessionTest extends BaseSessionTestCase
+class SymfonySessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
     {
-        return 'goutte';
+        return 'symfony';
     }
 
     public function testHeaders()
@@ -15,6 +16,7 @@ class GoutteSessionTest extends BaseSessionTestCase
 
         $session->setRequestHeader('Accept-Language', 'fr');
         $session->visit($this->base . '/_behat/tests/headers');
+
         $this->assertContains("'accept-language' =>", $session->getPage()->getContent());
         $this->assertContains("'fr'", $session->getPage()->getContent());
 

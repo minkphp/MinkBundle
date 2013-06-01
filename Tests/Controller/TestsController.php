@@ -1,6 +1,5 @@
 <?php
-
-namespace Behat\MinkBundle\Controller;
+namespace Behat\MinkBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,7 +21,7 @@ class TestsController extends Controller
 {
     public function pageAction($page)
     {
-        return $this->render('MinkBundle::page.html.twig', array(
+        return $this->render('MinkBundle::page.html.php', array(
             'page' => preg_replace('/page(\d+)/', 'Page N\\1', $page),
             'environment' => $this->get('kernel')->getEnvironment(),
             'genUrl' => $this->get('router')->generate('_behat_tests_page', array('page' => 'page0'), true),
@@ -36,14 +35,14 @@ class TestsController extends Controller
 
     public function formAction()
     {
-        return $this->render('MinkBundle::form.html.twig');
+        return $this->render('MinkBundle::form.html.php');
     }
 
     public function submitAction()
     {
         $data = $this->get('request')->request->all();
 
-        return $this->render('MinkBundle::submit.html.twig', array(
+        return $this->render('MinkBundle::submit.html.php', array(
             'method'     => $this->get('request')->getMethod(),
             'name'       => $data['name'],
             'age'        => $data['age'],
@@ -55,7 +54,7 @@ class TestsController extends Controller
     {
         $headers = $this->getRequest()->headers->all();
 
-        return $this->render('MinkBundle::headers.html.twig', array(
+        return $this->render('MinkBundle::headers.html.php', array(
             'headers' => var_export($headers, true)
         ));
     }

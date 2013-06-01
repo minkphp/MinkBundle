@@ -9,6 +9,7 @@
 
         <parameter key="mink.selenium.host">127.0.0.1</parameter>
         <parameter key="mink.selenium.port">4444</parameter>
+        <parameter key="mink.selenium.timeout">60</parameter>
         <parameter key="mink.selenium.browser">*%mink.browser_name%</parameter>
 
     </parameters>
@@ -29,6 +30,7 @@
         <service id="mink.selenium" class="%mink.selenium.class%" scope="prototype">
             <argument>%mink.selenium.host%</argument>
             <argument>%mink.selenium.port%</argument>
+            <argument>%mink.selenium.timeout%</argument>
         </service>
 
     </services>

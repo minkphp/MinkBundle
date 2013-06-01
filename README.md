@@ -1,12 +1,14 @@
+MinkBundle [![Build Status](https://api.travis-ci.org/Behat/MinkBundle.png?branch=master)](https://travis-ci.org/Behat/MinkBundle)
+
 Provides Behat\Mink browser abstraction library for PHPUnit in Symfony2 project.
 
 ## Features
 
-- Symfony2 test.client browser emulator - Works
-- Goutte browser emulator - Works
+- Symfony2 test.client browser emulator
+- Goutte browser emulator
 - Zombie (JS testing) browser emulator - To be done
-- Selenium2 (WebDriver) browser emulator - Works
-- Selenium (JS testing) browser emulator - Forgotten
+- Selenium2 (WebDriver) browser emulator
+- Selenium (JS testing) browser emulator
 - Sahi (JS testing) browser emulator - Not tested
 
 ## Configuration
@@ -27,27 +29,6 @@ All options can be overwrited in parameters.yml
 ```yaml
 mink.base_url: 'http://myhost.com'
 mink.browser_name: 'chrome'
-```
-
-## Run tests
-
-Install Symfony 2.2.* project and install this bundle as usual
-
-### Add routing
-routing_test.yml
-```yaml
-_main:
-    resource: routing.yml
-
-_mink_bundle:
-    resource: "@MinkBundle/Resources/config/routing.yml"
-    prefix:   /
-```
-
-And run tests from the root of the project
-
-```bash
-phpunit vendor/behat/mink-bundle/Behat/MinkBundle/Tests/*
 ```
 
 ## Documentation

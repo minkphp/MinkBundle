@@ -93,6 +93,9 @@ class Configuration implements ConfigurationInterface
                         scalarNode('port')->
                             defaultValue(4444)->
                         end()->
+                        scalarNode('timeout')->
+                            defaultValue(60)->
+                        end()->
                     end()->
                 end()->
                 arrayNode('selenium2')->

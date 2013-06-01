@@ -21,7 +21,14 @@
         "symfony/framework-bundle":     "2.2.*",
         "behat/mink-browserkit-driver": "1.0.*"
     },
-
+    "require-dev": {
+        "behat/mink-browserkit-driver": "1.0.*",
+        "behat/mink-goutte-driver":     "1.0.*",
+        "behat/mink-selenium-driver":   "1.0.*",
+        "behat/mink-selenium2-driver":  "1.0.*",
+        "behat/mink-zombie-driver":     "1.0.*",
+        "behat/mink-sahi-driver":       "1.0.*"
+    },
     "suggest": {
         "behat/mink-goutte-driver":     "fast headless driver for any app without JS emulation",
         "behat/mink-zombie-driver":     "fast and JS-enabled headless driver for any app (requires node.js)",

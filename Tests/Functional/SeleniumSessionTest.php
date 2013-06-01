@@ -1,6 +1,7 @@
 <?php
+namespace Behat\MinkBundle\Tests\Functional;
 
-namespace Behat\MinkBundle\Tests;
+use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
 class SeleniumSessionTest extends BaseSessionTestCase
 {
