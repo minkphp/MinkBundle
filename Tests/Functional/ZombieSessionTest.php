@@ -3,11 +3,10 @@ namespace Behat\MinkBundle\Tests\Functional;
 
 use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
-class ZombieSessionTest extends SahiSessionTest
+class ZombieSessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
     {
-        $this->markTestIncomplete('To be done');
         return 'zombie';
     }
 }

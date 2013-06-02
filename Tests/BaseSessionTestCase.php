@@ -64,7 +64,7 @@ abstract class BaseSessionTestCase extends MinkTestCase
         $page->selectFieldOption('speciality', 'manager');
         $page->pressButton('Send spec info');
 
-        $this->assertTrue($page->hasContent('POST recieved'));
+        $this->assertTrue($session->getPage()->hasContent('POST recieved'), $page->getContent());
         $this->assertTrue($page->hasContent('ever is 23 years old manager'));
     }
 }
