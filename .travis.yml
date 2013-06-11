@@ -2,6 +2,11 @@ language: php
 
 php: [5.3, 5.4, 5.5]
 
+env:
+  - SF_VERSION='2.1.*'
+  - SF_VERSION='2.2.*'
+  - SF_VERSION='2.3.*@dev'
+
 before_script:
   - export WEB_FIXTURES_HOST=http://localhost/index.php
 
@@ -20,11 +25,14 @@ before_script:
   - cd -
   - sleep 4
 
+  - node --version
+  - npm --version
   - npm install zombie@0.12.15
   - export NODE_PATH="$(pwd)/node_modules"
   - export PATH="/usr/local/share/npm/bin:$PATH"
 
   - curl http://getcomposer.org/installer | php
+  - php composer.phar require --no-update symfony/framework-bundle=$SF_VERSION
   - php composer.phar install --prefer-source --dev
 
   - sudo apt-get update > /dev/null
