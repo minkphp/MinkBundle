@@ -17,7 +17,7 @@
 
     "require": {
         "php":                          ">=5.3.3",
-        "behat/mink":                   "1.4.*",
+        "behat/mink":                   ">=1.4.0",
         "symfony/framework-bundle":     "2.2.*",
         "behat/mink-browserkit-driver": "1.0.*"
     },
