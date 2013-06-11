@@ -25,7 +25,7 @@ use Behat\Mink\Mink;
 abstract class MinkTestCase extends WebTestCase
 {
     /**
-     * @var /Behat/Mink/Mink
+     * @var \Behat\Mink\Mink
      */
     private static $mink;
 
