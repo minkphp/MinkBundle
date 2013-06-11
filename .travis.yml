@@ -13,7 +13,7 @@ before_script:
   - java -jar selenium.jar > /dev/null &
   - sleep 4
 
-  - curl http://switch.dl.sourceforge.net/project/sahi/sahi-v44/sahi_20130429.zip > sahi.zip
+  - curl http://garr.dl.sourceforge.net/project/sahi/sahi-v44/sahi_20130429.zip > sahi.zip
   - unzip sahi.zip > /dev/null
   - cd sahi/bin
   - sh sahi.sh > /dev/null &
