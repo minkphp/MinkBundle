@@ -35,6 +35,9 @@ class Configuration implements ConfigurationInterface
                 scalarNode('base_url')->
                     defaultNull()->
                 end()->
+                scalarNode('coverage_script')->
+                    defaultValue('bundles/mink/phpunit_coverage.php')->
+                end()->
                 scalarNode('show_cmd')->
                     defaultNull()->
                 end()->

@@ -25,6 +25,25 @@ use Behat\Mink\Mink;
 abstract class MinkTestCase extends WebTestCase
 {
     /**
+     * Full URL to local phpunit_coverage.php
+     *
+     * http://local-host/bundles/mink/phpunit_coverage.php
+     *
+     * @var string
+     */
+    protected $coverageScriptUrl;
+
+    /**
+     * @var boolean
+     */
+    private $collectCodeCoverageInformation;
+
+    /**
+     * @var string
+     */
+    private $testId;
+
+    /**
      * @var \Behat\Mink\Mink
      */
     private static $mink;
@@ -45,7 +64,10 @@ abstract class MinkTestCase extends WebTestCase
     public function getMink()
     {
         if (null === self::$mink) {
-            self::$mink = static::getKernel()->getContainer()->get('behat.mink');
+            $container = static::getKernel()->getContainer();
+            self::$mink = $container->get('behat.mink');
+            $this->coverageScriptUrl = $container->getParameter('mink.base_url') .
+            $container->getParameter('mink.coverage_script');
         }
 
         return self::$mink;
@@ -71,5 +93,66 @@ abstract class MinkTestCase extends WebTestCase
     public function getContainer()
     {
         return $this->getKernel()->getContainer();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function runTest()
+    {
+        $this->testId = get_class($this) . '__' . $this->getName();
+        if ($this->collectCodeCoverageInformation && $this->coverageScriptUrl) {
+            self::$mink->getSession()->setCookie('PHPUNIT_SELENIUM_TEST_ID', $this->testId);
+        }
+
+        return parent::runTest();
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestResult $result
+     * @return \PHPUnit_Framework_TestResult
+     */
+    public function run(\PHPUnit_Framework_TestResult $result = null)
+    {
+        if ($result === null) {
+            $result = $this->createResult();
+        }
+
+        $this->collectCodeCoverageInformation = $result->getCollectCodeCoverageInformation();
+
+        parent::run($result);
+
+        if ('symfony' != self::$mink->getDefaultSessionName() &&
+            $this->collectCodeCoverageInformation &&
+            $this->coverageScriptUrl
+        ) {
+
+            $session = self::$mink->getSession('goutte');
+
+            $url = sprintf(
+                '%s?PHPUNIT_SELENIUM_TEST_ID=%s',
+                $this->coverageScriptUrl,
+                $this->testId
+            );
+
+            $session->visit($url);
+
+            $coverage = array();
+            if ($content = $session->getPage()->getContent()) {
+                $coverage = unserialize($content);
+                if (is_array($coverage)) {
+                    $coverage = $this->matchLocalAndRemotePaths($coverage);
+                } else {
+                    throw new \RuntimeException('Empty or invalid code coverage data received from url "' . $url . '"');
+                }
+            }
+
+            $result->getCodeCoverage()->append(
+                $coverage,
+                $this
+            );
+        }
+
+        return $result;
     }
 }
