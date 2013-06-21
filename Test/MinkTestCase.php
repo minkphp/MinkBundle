@@ -1,5 +1,4 @@
 <?php
-
 namespace Behat\MinkBundle\Test;
 
 use Symfony\Component\Finder\Finder;
@@ -66,8 +65,7 @@ abstract class MinkTestCase extends WebTestCase
         if (null === self::$mink) {
             $container = static::getKernel()->getContainer();
             self::$mink = $container->get('behat.mink');
-            $this->coverageScriptUrl = $container->getParameter('mink.base_url') .
-            $container->getParameter('mink.coverage_script');
+            $this->coverageScriptUrl = $container->getParameter('mink.coverage_script_url');
         }
 
         return self::$mink;
@@ -95,17 +93,61 @@ abstract class MinkTestCase extends WebTestCase
         return $this->getKernel()->getContainer();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function runTest()
+    protected function initTestCoverage()
     {
         $this->testId = get_class($this) . '__' . $this->getName();
         if ($this->collectCodeCoverageInformation && $this->coverageScriptUrl) {
             self::$mink->getSession()->setCookie('PHPUNIT_SELENIUM_TEST_ID', $this->testId);
         }
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function runTest()
+    {
+        $this->initTestCoverage();
         return parent::runTest();
+    }
+
+    /**
+     * @param  string $path
+     * @return string
+     * @author Mattis Stordalen Flister <mattis@xait.no>
+     */
+    protected function findDirectorySeparator($path)
+    {
+        if (strpos($path, '/') !== false) {
+            return '/';
+        }
+
+        return '\\';
+    }
+
+    /**
+     * @param  array $coverage
+     * @return array
+     * @author Mattis Stordalen Flister <mattis@xait.no>
+     */
+    protected function matchLocalAndRemotePaths(array $coverage)
+    {
+        $coverageWithLocalPaths = array();
+
+        foreach ($coverage as $originalRemotePath => $data) {
+            $remotePath = $originalRemotePath;
+            $separator  = $this->findDirectorySeparator($remotePath);
+
+            while (!($localpath = stream_resolve_include_path($remotePath)) &&
+                strpos($remotePath, $separator) !== false) {
+                $remotePath = substr($remotePath, strpos($remotePath, $separator) + 1);
+            }
+
+            if ($localpath && md5_file($localpath) == $data['md5']) {
+                $coverageWithLocalPaths[$localpath] = $data['coverage'];
+            }
+        }
+
+        return $coverageWithLocalPaths;
     }
 
     /**
@@ -122,7 +164,8 @@ abstract class MinkTestCase extends WebTestCase
 
         parent::run($result);
 
-        if ('symfony' != self::$mink->getDefaultSessionName() &&
+        if (!empty(self::$mink) &&
+            'symfony' != self::$mink->getDefaultSessionName() &&
             $this->collectCodeCoverageInformation &&
             $this->coverageScriptUrl
         ) {
