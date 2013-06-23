@@ -198,7 +198,7 @@ Symfony2 app:
     $session
         ->visit($this->base.'/_behat/tests/page/page1');
     $this->assertTrue(
-        $session->getPage()->hasContent('Page N1')
+        $session->getPage()->hasContent('html:contains("Page N1")')
     );
 
     $session->getPage()->clickLink('p10');
