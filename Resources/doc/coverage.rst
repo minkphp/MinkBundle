@@ -45,17 +45,20 @@ config_test.yml
 
 .. code-block:: yml
 
-        server_name: localhost
-        mink.base_url: 'http://%server_name%/test.php'
-        mink.coverage_script_url: 'http://%server_name%/bundles/mink/phpunit_coverage.php'
+        parameters:
+                server_name: localhost
+                mink.base_url: 'http://%server_name%/test.php'
+                mink.coverage_script_url: 'http://%server_name%/bundles/mink/phpunit_coverage.php'
 
 NOTE
 ----
+
 
 For selenium(2) tests need additional functional in the test case:
 
 
 .. code-block:: php
+
         $this->session->visit('http://localhost');
         $this->initTestCoverage(); // Set cookie for selenium test coverage!!!
         $this->session->visit('http://localhost');
