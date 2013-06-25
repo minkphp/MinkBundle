@@ -54,7 +54,7 @@ NOTE
 ----
 
 
-For selenium(2) tests need additional functional in the test case:
+For selenium(2) tests need additional functional in the test:
 
 
 .. code-block:: php
