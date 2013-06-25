@@ -4,6 +4,7 @@ Code coverage
 test.php
 
 .. code-block:: php
+
         <?php
 
         use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +44,7 @@ test.php
 config_test.yml
 
 .. code-block:: yml
+
         server_name: localhost
         mink.base_url: 'http://%server_name%/test.php'
         mink.coverage_script_url: 'http://%server_name%/bundles/mink/phpunit_coverage.php'
