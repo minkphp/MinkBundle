@@ -28,7 +28,7 @@ class MinkExtension extends Extension
      * Loads the services based on your application configuration.
      *
      * @param array $configs
-     * @param Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -99,7 +99,7 @@ class MinkExtension extends Extension
     /**
      * Get File Loader
      *
-     * @param Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function getFileLoader($container)
     {

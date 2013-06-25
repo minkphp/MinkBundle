@@ -35,6 +35,7 @@ mink.browser_name: 'chrome'
 ## Documentation
 
 - [Installation](/Resources/doc/index.rst)
+- [Code coverage](/Resources/doc/coverage.rst)
 - [Mink Documentation](http://mink.behat.org)
 - [PHPUnit Documentation](http://www.phpunit.de/manual/current/en/index.html)
 

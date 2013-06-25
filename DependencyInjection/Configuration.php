@@ -35,6 +35,9 @@ class Configuration implements ConfigurationInterface
                 scalarNode('base_url')->
                     defaultNull()->
                 end()->
+                scalarNode('coverage_script_url')->
+                    defaultNull()->
+                end()->
                 scalarNode('show_cmd')->
                     defaultNull()->
                 end()->
