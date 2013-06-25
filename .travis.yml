@@ -15,13 +15,13 @@ before_script:
   - sleep 4
 
   - curl http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar > selenium.jar
-  - java -jar selenium.jar > /dev/null &
+  - java -jar selenium.jar > selenium.log &
   - sleep 4
 
   - curl http://garr.dl.sourceforge.net/project/sahi/sahi-v44/sahi_20130429.zip > sahi.zip
   - unzip sahi.zip > /dev/null
   - cd sahi/bin
-  - sh sahi.sh > /dev/null &
+  - sh sahi.sh > sahi.log &
   - cd -
   - sleep 4
 
@@ -41,3 +41,6 @@ before_script:
   - sudo /etc/init.d/apache2 restart
 
 script: phpunit -v
+after_failure:
+  - cat selenium.log
+  - cat sahi.log
