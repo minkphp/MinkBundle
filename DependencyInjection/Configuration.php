@@ -112,6 +112,13 @@ class Configuration implements ConfigurationInterface
                                 scalarNode('browserName')->
                                     defaultValue('%mink.browser_name%')->
                                 end()->
+                                arrayNode('firefox')->
+                                    children()->
+                                        scalarNode('profile')->
+                                            defaultNull()->
+                                        end()->
+                                    end()->
+                                end()->
                             end()->
                         end()->
                         scalarNode('wd_host')->
