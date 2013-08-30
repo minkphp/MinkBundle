@@ -70,11 +70,11 @@ abstract class MinkTestCase extends WebTestCase
      */
     public function getMink()
     {
-        if (null == self::$mink) {
+//        if (null == self::$mink) {
             $container = $this->getKernel()->getContainer();
             $this->coverageScriptUrl = $container->getParameter('mink.coverage_script_url');
             self::$mink = $container->get('behat.mink');
-        }
+//        }
         return self::$mink;
     }
 
