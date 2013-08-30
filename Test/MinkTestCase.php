@@ -58,16 +58,23 @@ abstract class MinkTestCase extends WebTestCase
     }
 
     /**
+     * @param Mink $mink
+     */
+    public function setMink(Mink $mink = null)
+    {
+        self::$mink = $mink;
+    }
+
+    /**
      * @return \Behat\Mink\Mink
      */
     public function getMink()
     {
-        if (null === self::$mink) {
-            $container = static::getKernel()->getContainer();
-            self::$mink = $container->get('behat.mink');
+        if (null == self::$mink) {
+            $container = $this->getKernel()->getContainer();
             $this->coverageScriptUrl = $container->getParameter('mink.coverage_script_url');
+            self::$mink = $container->get('behat.mink');
         }
-
         return self::$mink;
     }
 
@@ -97,7 +104,7 @@ abstract class MinkTestCase extends WebTestCase
     {
         $this->testId = get_class($this) . '__' . $this->getName();
         if ($this->collectCodeCoverageInformation && $this->coverageScriptUrl) {
-            self::$mink->getSession()->setCookie('PHPUNIT_SELENIUM_TEST_ID', $this->testId);
+            $this->getMink()->getSession()->setCookie('PHPUNIT_SELENIUM_TEST_ID', $this->testId);
         }
     }
 
@@ -164,13 +171,13 @@ abstract class MinkTestCase extends WebTestCase
 
         parent::run($result);
 
-        if (!empty(self::$mink) &&
-            'symfony' != self::$mink->getDefaultSessionName() &&
+        if (($mink = $this->getMink()) &&
+            'symfony' != $mink->getDefaultSessionName() &&
             $this->collectCodeCoverageInformation &&
             $this->coverageScriptUrl
         ) {
 
-            $session = self::$mink->getSession('goutte');
+            $session = $mink->getSession('goutte');
 
             $url = sprintf(
                 '%s?PHPUNIT_SELENIUM_TEST_ID=%s',
