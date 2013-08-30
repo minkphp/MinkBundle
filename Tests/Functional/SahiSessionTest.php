@@ -7,6 +7,7 @@ class SahiSessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
     {
+        $this->setMink();
         return 'sahi';
     }
 }

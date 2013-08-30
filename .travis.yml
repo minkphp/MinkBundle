@@ -33,7 +33,7 @@ before_script:
 
   - curl http://getcomposer.org/installer | php
   - php composer.phar require --no-update symfony/framework-bundle=$SF_VERSION
-  - php composer.phar install --prefer-source --dev
+  - php composer.phar install --dev
 
   - sudo apt-get update > /dev/null
   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 > /dev/null

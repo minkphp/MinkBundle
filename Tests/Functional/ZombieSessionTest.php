@@ -7,6 +7,7 @@ class ZombieSessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
     {
+        $this->setMink();
         return 'zombie';
     }
 }
