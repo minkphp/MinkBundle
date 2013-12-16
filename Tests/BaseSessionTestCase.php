@@ -11,6 +11,7 @@ abstract class BaseSessionTestCase extends MinkTestCase
 
     protected function setUp()
     {
+        self::$kernel = null;
         $this->getMink()->setDefaultSessionName(static::getSessionName());
         $this->base = empty($_SERVER['WEB_FIXTURES_HOST']) ?
             $this->getContainer()->getParameter('mink.base_url') :
