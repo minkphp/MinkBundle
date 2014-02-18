@@ -28,7 +28,7 @@ before_script:
 
   - node --version
   - npm --version
-  - npm install zombie@0.12.15
+  - npm install zombie@2.0.0-alpha29
   - export NODE_PATH="$(pwd)/node_modules"
   - export PATH="/usr/local/share/npm/bin:$PATH"
 
