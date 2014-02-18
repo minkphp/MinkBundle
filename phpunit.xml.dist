@@ -18,7 +18,9 @@
     </testsuites>
 
     <php>
-        <!--server name="WEB_FIXTURES_HOST" value="http://test.mink.dev" /-->
+        <!--
+        <server name="WEB_FIXTURES_HOST" value="http://test.mink.dev" />
+        /-->
         <server name="KERNEL_DIR" value="Tests/" />
     </php>
 

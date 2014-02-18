@@ -22,19 +22,23 @@ abstract class BaseSessionTestCase extends MinkTestCase
         $session = $this->getMink()->getSession();
 
         $session->visit($this->base . '/_behat/tests/page/page1');
+        $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
         $this->assertFalse($session->getPage()->hasContent('Page N2'));
 
         $session->visit($this->base . '/_behat/tests/page/page2');
+        $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N2'));
         $this->assertFalse($session->getPage()->hasContent('Page N1'));
 
         $session->visit($this->base . '/_behat/tests/page/page1');
+        $this->wait();
         $session->getPage()->clickLink('p10');
+        $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N10'));
 
         $session->getPage()->clickLink('p22');
-
+        $this->wait();
         $this->assertNotNull($environment = $session->getPage()->find('css', '#environment'));
         $this->assertEquals('test', $environment->getText());
 
@@ -49,6 +53,7 @@ abstract class BaseSessionTestCase extends MinkTestCase
         $session = $this->getMink()->getSession();
 
         $session->visit($this->base . '/_behat/tests/redirect');
+        $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
     }
 
@@ -57,14 +62,22 @@ abstract class BaseSessionTestCase extends MinkTestCase
         $session = $this->getMink()->getSession();
 
         $session->visit($this->base . '/_behat/tests/form');
+        $this->wait();
         $page = $session->getPage();
 
         $page->fillField('name', 'ever');
         $page->fillField('age', '23');
         $page->selectFieldOption('speciality', 'manager');
         $page->pressButton('Send spec info');
-
+        $this->wait();
         $this->assertTrue($session->getPage()->hasContent('POST recieved'), $page->getContent());
         $this->assertTrue($page->hasContent('ever is 23 years old manager'));
+    }
+
+    protected function wait()
+    {
+        if ('selenium' === $this->getSessionName()) {
+            $this->getMink()->getSession()->wait('2000');
+        }
     }
 }

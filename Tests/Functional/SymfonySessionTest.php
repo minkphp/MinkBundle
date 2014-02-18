@@ -3,6 +3,9 @@ namespace Behat\MinkBundle\Tests\Functional;
 
 use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
+/**
+ * @group symfony
+ */
 class SymfonySessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()

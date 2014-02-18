@@ -5,3 +5,4 @@ composer.phar
 phpunit.xml
 Tests/cache
 Tests/logs
+selenium.jar
