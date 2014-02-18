@@ -3,6 +3,9 @@ namespace Behat\MinkBundle\Tests\Functional;
 
 use Behat\MinkBundle\Tests\BaseSessionTestCase;
 
+/**
+ * @group goutte
+ */
 class GoutteSessionTest extends BaseSessionTestCase
 {
     protected function getSessionName()
