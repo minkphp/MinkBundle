@@ -19,7 +19,7 @@ before_script:
   - java -jar selenium.jar > selenium.log &
   - sleep 4
 
-  - curl http://garr.dl.sourceforge.net/project/sahi/sahi-v44/sahi_20130429.zip > sahi.zip
+  - wget -O sahi.zip https://sourceforge.net/projects/sahi/files/sahi-v44/sahi_20130429.zip
   - unzip sahi.zip > /dev/null
   - cd sahi/bin
   - sh sahi.sh > sahi.log &
