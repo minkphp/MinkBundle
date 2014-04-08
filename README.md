@@ -1,4 +1,7 @@
-# MinkBundle [![Build Status](https://api.travis-ci.org/Behat/MinkBundle.png)](https://travis-ci.org/Behat/MinkBundle)
+# MinkBundle
+
+[![Build Status](https://api.travis-ci.org/Behat/MinkBundle.png)](https://travis-ci.org/Behat/MinkBundle)
+[![Total Downloads](https://poser.pugx.org/behat/mink-bundle/downloads.png)](https://packagist.org/packages/behat/mink-bundle)
 
 Provides Behat\Mink browser abstraction library for PHPUnit in Symfony2 project.
 
