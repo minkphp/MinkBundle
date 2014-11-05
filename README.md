@@ -1,7 +1,10 @@
 # MinkBundle
 
-[![Build Status](https://api.travis-ci.org/Behat/MinkBundle.png)](https://travis-ci.org/Behat/MinkBundle)
-[![Total Downloads](https://poser.pugx.org/behat/mink-bundle/downloads.png)](https://packagist.org/packages/behat/mink-bundle)
+[![Build Status](https://travis-ci.org/Behat/MinkBundle.svg)](https://travis-ci.org/Behat/MinkBundle)
+[![Latest Stable Version](https://poser.pugx.org/behat/mink-bundle/version.svg)](https://packagist.org/packages/behat/mink-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/behat/mink-bundle/v/unstable.svg)](//packagist.org/packages/behat/mink-bundle)
+[![Total Downloads](https://poser.pugx.org/behat/mink-bundle/downloads.svg)](https://packagist.org/packages/behat/mink-bundle)
+[![License](https://poser.pugx.org/behat/mink-bundle/license.svg)](https://packagist.org/packages/behat/mink-bundle)
 
 Provides Behat\Mink browser abstraction library for PHPUnit in Symfony2 project.
 
