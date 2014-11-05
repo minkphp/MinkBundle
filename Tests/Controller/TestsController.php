@@ -1,16 +1,18 @@
 <?php
-namespace Behat\MinkBundle\Tests\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Symfony\Component\HttpFoundation\RedirectResponse;
 
 /*
- * This file is part of the MinkBundle.
+ * This file is part of the Behat MinkBundle
+ *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
+
+namespace Behat\MinkBundle\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * MinkBundle test actions controller.
@@ -46,7 +48,7 @@ class TestsController extends Controller
             'method'     => $this->get('request')->getMethod(),
             'name'       => $data['name'],
             'age'        => $data['age'],
-            'speciality' => $data['speciality']
+            'speciality' => $data['speciality'],
         ));
     }
 
@@ -55,7 +57,7 @@ class TestsController extends Controller
         $headers = $this->getRequest()->headers->all();
 
         return $this->render('MinkBundle::headers.html.php', array(
-            'headers' => var_export($headers, true)
+            'headers' => var_export($headers, true),
         ));
     }
 }

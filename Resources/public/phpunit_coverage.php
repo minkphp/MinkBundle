@@ -44,10 +44,10 @@
 
 require_once 'File/Iterator/Autoload.php';
 require_once 'PHP/CodeCoverage/Autoload.php';
-require __DIR__ . '/../../Coverage/globals.php';
+require __DIR__.'/../../Coverage/globals.php';
 
 if (isset($_GET['PHPUNIT_SELENIUM_TEST_ID'])) {
-    $facade = new File_Iterator_Facade;
+    $facade = new File_Iterator_Facade();
     $files = $facade->getFilesAsArray(
         $GLOBALS['PHPUNIT_COVERAGE_DATA_DIRECTORY'],
         $_GET['PHPUNIT_SELENIUM_TEST_ID']
@@ -65,7 +65,7 @@ if (isset($_GET['PHPUNIT_SELENIUM_TEST_ID'])) {
                 if (!isset($coverage[$file])) {
                     $coverage[$file] = array(
                         'md5' => md5_file($file),
-                        'coverage' => $lines
+                        'coverage' => $lines,
                     );
                 } else {
                     foreach ($lines as $line => $flag) {
@@ -82,4 +82,3 @@ if (isset($_GET['PHPUNIT_SELENIUM_TEST_ID'])) {
 
     print serialize($coverage);
 }
-

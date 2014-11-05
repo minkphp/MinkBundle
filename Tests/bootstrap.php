@@ -5,4 +5,4 @@ if (!is_dir($vendor = __DIR__.'/../vendor')) {
 }
 umask(0000);
 
-require($vendor.'/autoload.php');
+require $vendor.'/autoload.php';

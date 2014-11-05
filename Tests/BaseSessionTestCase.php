@@ -1,6 +1,8 @@
 <?php
+
 namespace Behat\MinkBundle\Tests;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\MinkBundle\Test\MinkTestCase;
 
 abstract class BaseSessionTestCase extends MinkTestCase
@@ -21,17 +23,17 @@ abstract class BaseSessionTestCase extends MinkTestCase
     {
         $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '/_behat/tests/page/page1');
+        $session->visit($this->base.'/_behat/tests/page/page1');
         $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
         $this->assertFalse($session->getPage()->hasContent('Page N2'));
 
-        $session->visit($this->base . '/_behat/tests/page/page2');
+        $session->visit($this->base.'/_behat/tests/page/page2');
         $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N2'));
         $this->assertFalse($session->getPage()->hasContent('Page N1'));
 
-        $session->visit($this->base . '/_behat/tests/page/page1');
+        $session->visit($this->base.'/_behat/tests/page/page1');
         $this->wait();
         $session->getPage()->clickLink('p10');
         $this->wait();
@@ -45,14 +47,15 @@ abstract class BaseSessionTestCase extends MinkTestCase
         try {
             $session->getPage()->clickLink('p100');
             $this->fail('Unexisting link should throw exception onClick');
-        } catch (\Behat\Mink\Exception\ElementNotFoundException $e) {}
+        } catch (ElementNotFoundException $e) {
+        }
     }
 
     public function testRedirects()
     {
         $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '/_behat/tests/redirect');
+        $session->visit($this->base.'/_behat/tests/redirect');
         $this->wait();
         $this->assertTrue($session->getPage()->hasContent('Page N1'));
     }
@@ -61,7 +64,7 @@ abstract class BaseSessionTestCase extends MinkTestCase
     {
         $session = $this->getMink()->getSession();
 
-        $session->visit($this->base . '/_behat/tests/form');
+        $session->visit($this->base.'/_behat/tests/form');
         $this->wait();
         $page = $session->getPage();
 

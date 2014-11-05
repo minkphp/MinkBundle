@@ -1,15 +1,7 @@
 <?php
 
-namespace Behat\MinkBundle\DependencyInjection;
-
-use Symfony\Component\Config\Definition\Processor,
-    Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\Config\FileLocator;
-
 /*
- * This file is part of the Behat\MinkBundle
+ * This file is part of the Behat MinkBundle
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
@@ -17,19 +9,21 @@ use Symfony\Component\Config\Definition\Processor,
  * with this source code in the file LICENSE.
  */
 
+namespace Behat\MinkBundle\DependencyInjection;
+
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\FileLocator;
+
 /**
  * Symfony2 Behat\Mink extension.
  *
- * @author      Konstantin Kudryashov <ever.zet@gmail.com>
+ * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
 class MinkExtension extends Extension
 {
-    /**
-     * Loads the services based on your application configuration.
-     *
-     * @param array $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor      = new Processor();
@@ -91,7 +85,7 @@ class MinkExtension extends Extension
 
         if (!$container->hasParameter('mink.paths.lib')) {
             $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
-            $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
+            $minkLibPath    = realpath(dirname($minkReflection->getFilename()).'/../../../');
             $container->setParameter('mink.paths.lib', $minkLibPath);
         }
     }

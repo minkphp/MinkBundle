@@ -6,6 +6,6 @@
 // the same directory in phpunit_coverage.php. Also note that the webserver
 // needs write access to the directory.
 
-$path = realpath(__DIR__ . '/../../../../../../app/logs') . '/coverage';
+$path = realpath(__DIR__.'/../../../../../../app/logs').'/coverage';
 @mkdir($path, 0777);
 $GLOBALS['PHPUNIT_COVERAGE_DATA_DIRECTORY'] = $path;

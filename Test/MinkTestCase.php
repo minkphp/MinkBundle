@@ -1,19 +1,18 @@
 <?php
-namespace Behat\MinkBundle\Test;
-
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Behat\Mink\Mink;
 
 /*
- * This file is part of the Behat\MinkBundle
+ * This file is part of the Behat MinkBundle
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
+
+namespace Behat\MinkBundle\Test;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Behat\Mink\Mink;
 
 /**
  * Mink PHPUnit test case.
@@ -76,6 +75,7 @@ abstract class MinkTestCase extends WebTestCase
             $this->coverageScriptUrl = $container->getParameter('mink.coverage_script_url');
             self::$mink = $container->get('behat.mink');
         }
+
         return self::$mink;
     }
 
@@ -90,6 +90,7 @@ abstract class MinkTestCase extends WebTestCase
         if (!static::$kernel->getContainer()) {
             static::$kernel->boot();
         }
+
         return static::$kernel;
     }
 
@@ -103,7 +104,7 @@ abstract class MinkTestCase extends WebTestCase
 
     protected function initTestCoverage()
     {
-        $this->testId = get_class($this) . '__' . $this->getName();
+        $this->testId = get_class($this).'__'.$this->getName();
         if ($this->collectCodeCoverageInformation && $this->coverageScriptUrl) {
             $this->getMink()->getSession()->setCookie('PHPUNIT_SELENIUM_TEST_ID', $this->testId);
         }
@@ -115,6 +116,7 @@ abstract class MinkTestCase extends WebTestCase
     public function runTest()
     {
         $this->initTestCoverage();
+
         return parent::runTest();
     }
 
@@ -133,8 +135,10 @@ abstract class MinkTestCase extends WebTestCase
     }
 
     /**
-     * @param  array $coverage
+     * @param array $coverage
+     *
      * @return array
+     *
      * @author Mattis Stordalen Flister <mattis@xait.no>
      */
     protected function matchLocalAndRemotePaths(array $coverage)
@@ -160,11 +164,12 @@ abstract class MinkTestCase extends WebTestCase
 
     /**
      * @param \PHPUnit_Framework_TestResult $result
+     *
      * @return \PHPUnit_Framework_TestResult
      */
     public function run(\PHPUnit_Framework_TestResult $result = null)
     {
-        if ($result === null) {
+        if (null === $result) {
             $result = $this->createResult();
         }
 
@@ -177,7 +182,6 @@ abstract class MinkTestCase extends WebTestCase
             $this->collectCodeCoverageInformation &&
             $this->coverageScriptUrl
         ) {
-
             $session = $mink->getSession('goutte');
 
             $url = sprintf(
@@ -194,7 +198,7 @@ abstract class MinkTestCase extends WebTestCase
                 if (is_array($coverage)) {
                     $coverage = $this->matchLocalAndRemotePaths($coverage);
                 } else {
-                    throw new \RuntimeException('Empty or invalid code coverage data received from url "' . $url . '"');
+                    throw new \RuntimeException('Empty or invalid code coverage data received from url "'.$url.'"');
                 }
             }
 

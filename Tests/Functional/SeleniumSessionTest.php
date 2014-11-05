@@ -1,4 +1,5 @@
 <?php
+
 namespace Behat\MinkBundle\Tests\Functional;
 
 use Behat\MinkBundle\Tests\BaseSessionTestCase;

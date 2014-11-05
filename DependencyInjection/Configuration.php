@@ -1,12 +1,7 @@
 <?php
 
-namespace Behat\MinkBundle\DependencyInjection;
-
-use Symfony\Component\Config\Definition\Builder\TreeBuilder,
-    Symfony\Component\Config\Definition\ConfigurationInterface;
-
 /*
- * This file is part of the Behat\MinkBundle
+ * This file is part of the Behat MinkBundle
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
@@ -14,18 +9,18 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder,
  * with this source code in the file LICENSE.
  */
 
+namespace Behat\MinkBundle\DependencyInjection;
+
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+
 /**
  * MinkBundle configuration manager.
  *
- * @author      Konstantin Kudryashov <ever.zet@gmail.com>
+ * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * Returns configuration tree.
-     *
-     * @return  Symfony\Component\Config\Definition\Builder\TreeBuilder
-     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
