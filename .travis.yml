@@ -16,7 +16,7 @@ before_script:
   - export DISPLAY=:99.0
   - sleep 4
 
-  - curl http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar > selenium.jar
+  - curl -L http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar > selenium.jar
   - java -jar selenium.jar > selenium.log 2>&1 &
   - sleep 4
 
