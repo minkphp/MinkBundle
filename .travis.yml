@@ -1,12 +1,13 @@
 language: php
 
-php: [5.3, 5.4, 5.5]
+php: [5.3, 5.4, 5.5, 5.6]
 
-env:
-  - SF_VERSION='2.1.*'
-  - SF_VERSION='2.2.*'
-  - SF_VERSION='2.3.*'
-  - SF_VERSION='2.4.*'
+matrix:
+  include:
+    - php: 5.5
+      env: SYMFONY_VERSION='2.3.*'
+    - php: 5.5
+      env: SYMFONY_VERSION='dev-master'
 
 before_script:
   - export WEB_FIXTURES_HOST=http://localhost/index.php
@@ -16,32 +17,27 @@ before_script:
   - sleep 4
 
   - curl http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar > selenium.jar
-  - java -jar selenium.jar > selenium.log &
+  - java -jar selenium.jar > selenium.log 2>&1 &
   - sleep 4
 
   - wget -O sahi.zip https://sourceforge.net/projects/sahi/files/sahi-v44/sahi_20130429.zip
   - unzip sahi.zip > /dev/null
   - cd sahi/bin
-  - sh sahi.sh > sahi.log &
+  - sh sahi.sh > sahi.log 2>&1 &
   - cd -
   - sleep 4
 
   - node --version
   - npm --version
-  - npm install zombie@2.0.0-alpha29
+  - npm install zombie
   - export NODE_PATH="$(pwd)/node_modules"
   - export PATH="/usr/local/share/npm/bin:$PATH"
 
-  - curl http://getcomposer.org/installer | php
-  - php composer.phar require --no-update symfony/framework-bundle=$SF_VERSION
-  - php composer.phar install --dev --prefer-source
+  - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require -n --no-update symfony/symfony=$SYMFONY_VERSION; fi;'
+  - composer install --prefer-source
 
-  - sudo apt-get update > /dev/null
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 > /dev/null
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5
   - sudo sed -i -e "s,/var/www,$(pwd)/Tests/Resources/public,g" /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
 
 script: phpunit -v
-after_failure:
-  - cat selenium.log
-  - cat sahi.log
