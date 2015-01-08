@@ -1,6 +1,7 @@
 # MinkBundle
 
-[![Build Status](https://travis-ci.org/Behat/MinkBundle.svg)](https://travis-ci.org/Behat/MinkBundle)
+[![Build Status](https://travis-ci.org/minkphp/MinkBundle.svg)](https://travis-ci.org/minkphp/MinkBundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/minkphp/MinkBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/minkphp/MinkBundle/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/behat/mink-bundle/version.svg)](https://packagist.org/packages/behat/mink-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/behat/mink-bundle/v/unstable.svg)](//packagist.org/packages/behat/mink-bundle)
 [![Total Downloads](https://poser.pugx.org/behat/mink-bundle/downloads.svg)](https://packagist.org/packages/behat/mink-bundle)
@@ -40,8 +41,8 @@ mink.browser_name: 'chrome'
 
 ## Documentation
 
-- [Installation](/Resources/doc/index.rst)
-- [Code coverage](/Resources/doc/coverage.rst)
+- [Installation](Resources/doc/index.rst)
+- [Code coverage](Resources/doc/coverage.rst)
 - [Mink Documentation](http://mink.behat.org)
 - [PHPUnit Documentation](http://www.phpunit.de/manual/current/en/index.html)
 
