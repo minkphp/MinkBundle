@@ -2,7 +2,7 @@
 
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         colors="false"
+         colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -12,7 +12,7 @@
          bootstrap="Tests/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="Driver test suite">
+        <testsuite name="Bundle test suite">
             <directory>./Tests/Functional</directory>
         </testsuite>
     </testsuites>
@@ -26,7 +26,12 @@
 
     <filter>
         <whitelist>
-            <directory>./Tests/Functional</directory>
+            <directory>./</directory>
+            <exclude>
+                <directory>./Resources</directory>
+                <directory>./Tests</directory>
+                <directory>./vendor</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
