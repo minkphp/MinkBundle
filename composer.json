@@ -37,7 +37,6 @@
     },
 
     "autoload": {
-        "psr-0": { "Behat\\MinkBundle": "" }
-    },
-    "target-dir": "Behat/MinkBundle"
+        "psr-4": { "Behat\\MinkBundle\\": "" }
+    }
 }
