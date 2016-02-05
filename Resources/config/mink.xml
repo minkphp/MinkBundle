@@ -19,11 +19,11 @@
     </parameters>
     <services>
 
-        <service id="behat.mink" class="%mink.class%" scope="prototype" />
+        <service id="behat.mink" class="%mink.class%" shared="false" />
 
-        <service id="mink.session.symfony" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.symfony" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.symfony.class%" scope="prototype">
+                <service class="%mink.driver.symfony.class%" shared="false">
                     <argument type="service" id="test.client" />
                 </service>
             </argument>

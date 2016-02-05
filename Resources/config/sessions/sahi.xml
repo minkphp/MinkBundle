@@ -15,9 +15,9 @@
     </parameters>
     <services>
 
-        <service id="mink.session.sahi" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.sahi" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.sahi.class%" scope="prototype">
+                <service class="%mink.driver.sahi.class%" shared="false">
                     <argument>%mink.browser_name%</argument>
                     <argument type="service" id="mink.sahi" />
                 </service>
@@ -26,9 +26,9 @@
             <tag name="mink.session" alias="sahi" />
         </service>
 
-        <service id="mink.sahi" class="%mink.sahi.class%" scope="prototype">
+        <service id="mink.sahi" class="%mink.sahi.class%" shared="false">
             <argument type="service">
-                <service class="%mink.sahi.connection.class%" scope="prototype">
+                <service class="%mink.sahi.connection.class%" shared="false">
                     <argument>%mink.sahi.sid%</argument>
                     <argument>%mink.sahi.host%</argument>
                     <argument>%mink.sahi.port%</argument>

@@ -10,9 +10,9 @@
     </parameters>
     <services>
 
-        <service id="mink.session.goutte" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.goutte" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.goutte.class%" scope="prototype">
+                <service class="%mink.driver.goutte.class%" shared="false">
                     <argument type="service" id="mink.goutte" />
                 </service>
             </argument>
@@ -20,7 +20,7 @@
             <tag name="mink.session" alias="goutte" />
         </service>
 
-        <service id="mink.goutte" class="%mink.goutte.class%" scope="prototype">
+        <service id="mink.goutte" class="%mink.goutte.class%" shared="false">
         </service>
 
     </services>
