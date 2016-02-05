@@ -15,9 +15,9 @@
     </parameters>
     <services>
 
-        <service id="mink.session.selenium" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.selenium" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.selenium.class%" scope="prototype">
+                <service class="%mink.driver.selenium.class%" shared="false">
                     <argument>%mink.selenium.browser%</argument>
                     <argument>%mink.base_url%</argument>
                     <argument type="service" id="mink.selenium" />
@@ -27,7 +27,7 @@
             <tag name="mink.session" alias="selenium" />
         </service>
 
-        <service id="mink.selenium" class="%mink.selenium.class%" scope="prototype">
+        <service id="mink.selenium" class="%mink.selenium.class%" shared="false">
             <argument>%mink.selenium.host%</argument>
             <argument>%mink.selenium.port%</argument>
             <argument>%mink.selenium.timeout%</argument>

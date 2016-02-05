@@ -14,9 +14,9 @@
     </parameters>
     <services>
 
-        <service id="mink.session.zombie" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.zombie" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.zombie.class%" scope="prototype">
+                <service class="%mink.driver.zombie.class%" shared="false">
                     <argument type="service" id="mink.zombie.server" />
                 </service>
             </argument>
@@ -24,7 +24,7 @@
             <tag name="mink.session" alias="zombie" />
         </service>
 
-        <service id="mink.zombie.server" class="%mink.zombie.server.class%" scope="prototype">
+        <service id="mink.zombie.server" class="%mink.zombie.server.class%" shared="false">
             <argument>%mink.zombie.host%</argument>
             <argument>%mink.zombie.port%</argument>
             <argument>%mink.zombie.node_bin%</argument>

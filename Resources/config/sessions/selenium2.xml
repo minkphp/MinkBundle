@@ -15,9 +15,9 @@
     </parameters>
     <services>
 
-        <service id="mink.session.selenium2" class="%mink.session.class%" scope="prototype">
+        <service id="mink.session.selenium2" class="%mink.session.class%" shared="false">
             <argument type="service">
-                <service class="%mink.driver.selenium2.class%" scope="prototype">
+                <service class="%mink.driver.selenium2.class%" shared="false">
                     <argument type="string">%mink.selenium2.browser%</argument>
                     <argument>%mink.selenium2.capabilities%</argument>
                     <argument type="string">%mink.selenium2.wd_host%</argument>
