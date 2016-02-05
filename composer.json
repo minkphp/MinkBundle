@@ -18,15 +18,15 @@
     "require": {
         "php":                          ">=5.3.3",
         "behat/mink":                   "~1.4",
-        "symfony/framework-bundle":     "~2.2",
+        "symfony/framework-bundle":     "~2.2|~3.0",
         "behat/mink-browserkit-driver": "~1.1"
     },
     "require-dev": {
         "behat/mink-goutte-driver":     "~1.0,>=1.0.8",
-        "behat/mink-selenium-driver":   "~1.1",
         "behat/mink-selenium2-driver":  "~1.1",
         "behat/mink-zombie-driver":     "~1.1",
-        "behat/mink-sahi-driver":       "~1.1"
+        "behat/mink-sahi-driver":       "~1.1",
+        "phpunit/phpunit": "~4|~5"
     },
     "suggest": {
         "behat/mink-goutte-driver":     "fast headless driver for any app without JS emulation",

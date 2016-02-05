@@ -1,6 +1,6 @@
 language: php
 
-php: [5.3, 5.4, 5.5, 5.6, hhvm]
+php: [5.3, 5.4, 5.5, 5.6]
 
 matrix:
   include:
@@ -8,6 +8,14 @@ matrix:
       env: SYMFONY_VERSION='2.3.*'
     - php: 5.6
       env: SYMFONY_VERSION='2.5.*'
+    - php: 5.6
+      env: SYMFONY_VERSION='2.6.*'
+    - php: 5.6
+      env: SYMFONY_VERSION='2.7.*'
+    - php: 5.6
+      env: SYMFONY_VERSION='2.8.*'
+    - php: 5.6
+      env: SYMFONY_VERSION='3.0.*'
 
 before_script:
   - export WEB_FIXTURES_HOST=http://localhost/index.php
@@ -16,8 +24,8 @@ before_script:
   - export DISPLAY=:99.0
   - sleep 4
 
-  - curl -L http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar > selenium.jar
-  - java -jar selenium.jar > selenium.log 2>&1 &
+  - curl -L http://selenium-release.storage.googleapis.com/2.50/selenium-server-standalone-2.50.0.jar > selenium.jar
+  - java -jar selenium.jar > Tests/logs/selenium.log 2>&1 &
   - sleep 4
 
   - wget -O sahi.zip https://sourceforge.net/projects/sahi/files/sahi-v44/sahi_20130429.zip
@@ -36,9 +44,23 @@ before_script:
   - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require -n --no-update symfony/symfony=$SYMFONY_VERSION; fi;'
   - composer install --prefer-source
 
-  - sudo apt-get update
-  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5
-  - sudo sed -i -e "s,/var/www,$(pwd)/Tests/Resources/public,g" /etc/apache2/sites-available/default
-  - sudo /etc/init.d/apache2 restart
+  - sudo chmod -R 0777 Tests/logs
+  - sudo apt-get update > /dev/null
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-fastcgi > /dev/null
+  # enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # configure apache virtual hosts
+  - sudo cp -f Tests/Resources/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)/Tests?g" --in-place /etc/apache2/sites-available/default
+  - sudo /etc/init.d/apache2 restart || (sudo cat /var/log/apache2/error.log && exit 1)
 
-script: phpunit -v
+script: ./vendor/bin/phpunit -v --debug
+after_failure:
+  - cat Tests/logs/selenium.log
+  - cat Tests/logs/apache-access.log
+  - cat Tests/logs/apache-error.log
+  - cat Tests/logs/cgi.log
+  - firefox-bin -v
