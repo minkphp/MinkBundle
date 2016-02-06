@@ -15,7 +15,7 @@ $container->loadFromExtension(
         'base_url' => 'http://localhost',
         'sahi' => array(),
         'zombie' => array(),
-        'selenium' => array(),
+//        'selenium' => array(),
         'selenium2' => array(),
     )
 );
